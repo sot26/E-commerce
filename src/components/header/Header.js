@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {FaBars, FaShoppingCart, FaTimes} from 'react-icons/fa'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 
@@ -11,7 +11,7 @@ const Header = () => {
     }
 
     const activeLink = ({isActive}) => 
-    (isActive ? 'border-b-4NavLborder-orange-600' : '')
+    (isActive ? 'border-b-4 NavLborder-orange-600' : '')
 
   return (
     <div className='h-[60px] sm:h-[80px] bg-black text-white '>
@@ -30,13 +30,13 @@ const Header = () => {
             </div>
             <div className='lg:flex items-center text-[20px] hidden '>
                 <span className='flex'>
-                    <NavLink className={activeLink}>
+                    <NavLink className={activeLink} to='/login'>
                         <p className='px-2 hover:text-orange-600'>Login</p>
                     </NavLink>
-                    <NavLink className={activeLink}>
+                    <NavLink className={activeLink} to='/register'>
                         <p className='px-2 hover:text-orange-600'>Register</p>
                     </NavLink>
-                    <NavLink className={activeLink}>
+                    <NavLink className={activeLink} to='/order'>
                         <p className='px-2 hover:text-orange-600'>My Orders</p>
                     </NavLink>
                 </span>

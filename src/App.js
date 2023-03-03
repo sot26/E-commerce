@@ -7,6 +7,7 @@ import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
 import Contact from './pages/contact/Contact';
 import Home from './pages/home/Home';
+import OrderHistory from './pages/orderHistory/OrderHistory';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/order' element={<OrderHistory />} />
           <Route path='/reset' element={<Reset />} />
         </Routes>
       <Footer />
