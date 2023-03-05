@@ -1,6 +1,6 @@
-import { signOut } from "firebase/auth";
-import React, { useState } from "react";
-import { FaBars, FaShoppingCart, FaTimes } from "react-icons/fa";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { FaBars, FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +8,7 @@ import { auth } from "../../firebase/config";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   function navClick() {
@@ -16,6 +17,18 @@ const Header = () => {
 
   const activeLink = ({ isActive }) =>
     isActive ? "border-b-4 NavLborder-orange-600" : "";
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user.displayName);
+        setUserName(user.displayName);
+      } else {
+        setUserName("");
+      }
+    });
+  }, []);
 
   const logoutUser = () => {
     signOut(auth)
@@ -52,6 +65,10 @@ const Header = () => {
               <NavLink className={activeLink} to="/login">
                 <p className="px-2 hover:text-orange-600">Login</p>
               </NavLink>
+              <div className="flex hover:text-orange-600 px-2 items-center justify-center">
+                <FaUserCircle />
+                <p>Hi, {userName}</p>
+              </div>
               <NavLink className={activeLink} to="/register">
                 <p className="px-2 hover:text-orange-600">Register</p>
               </NavLink>

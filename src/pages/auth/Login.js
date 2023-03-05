@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import login from "../../assets/login.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +29,19 @@ const Login = () => {
       .catch((error) => {
         toast.error(error.message);
         console.log(error);
+      });
+  };
+
+  const provider = new GoogleAuthProvider();
+  const loginWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        navigate("/");
+        toast.success("Logged In Successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
   return (
@@ -71,7 +88,10 @@ const Login = () => {
                 <p className="text-xl py-3">Forget Password</p>
               </Link>
               <p className="text-center text-xl">--or--</p>
-              <button className="flex bg-orange-600 h-[40px] text-white w-full items-center justify-center text-xl font-semibold mt-3 mb-6 rounded-lg">
+              <button
+                onClick={loginWithGoogle}
+                className="flex bg-orange-600 h-[40px] text-white w-full items-center justify-center text-xl font-semibold mt-3 mb-6 rounded-lg"
+              >
                 <FaGoogle size={30} className="px-2" />
                 Login With Google
               </button>
