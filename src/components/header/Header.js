@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { auth } from "../../firebase/config";
-import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
+import { SET_ACTIVE_USER} from "../../redux/slice/authSlice";
+
 
 const Header = () => {
   const [nav, setNav] = useState(false);
@@ -25,19 +27,28 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+
+        if(user.displayName == null) {
+          const firstLetter = user.email.substring(0, user.email.indexOf("@"))
+          const remLetters = firstLetter.charAt(0).toUpperCase() + firstLetter.slice(1)
+          setUserName(remLetters)
+        } else {
+          setUserName(user.displayName)
+        }
         // console.log(user);
         // const uid = user.uid;
-        console.log(user.displayName);
-        setUserName(user.displayName);
+        // console.log(user.displayName);
         dispath(
           SET_ACTIVE_USER({
             email: user.email,
-            userName: user.displayName,
+            userName: user.displayName ? user.displayName : setUserName,
             userID: user.uid,
           })
         );
       } else {
-        setUserName("");
+        setUserName("")
+        dispath(REMOVE_ACTIVE_USER())
+        
       }
     });
   }, []);
