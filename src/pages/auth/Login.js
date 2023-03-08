@@ -46,7 +46,6 @@ const Login = () => {
   };
   return (
     <>
-      <ToastContainer />
       <div className="w-full h-full">
         <div className="w-full flex items-center justify-center px-10 h-[100vh]">
           <div className="hidden md:flex h-[600px]">

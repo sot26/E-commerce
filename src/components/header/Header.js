@@ -2,13 +2,15 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { auth } from "../../firebase/config";
-import { SET_ACTIVE_USER} from "../../redux/slice/authSlice";
-
+import {
+  SET_ACTIVE_USER,
+  REMOVE_ACTIVE_USER,
+} from "../../redux/slice/authSlice";
+import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
@@ -22,18 +24,18 @@ const Header = () => {
   }
 
   const activeLink = ({ isActive }) =>
-    isActive ? "border-b-4 NavLborder-orange-600" : "";
+    isActive ? "border-b-4 text-orange-600" : "";
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-
-        if(user.displayName == null) {
-          const firstLetter = user.email.substring(0, user.email.indexOf("@"))
-          const remLetters = firstLetter.charAt(0).toUpperCase() + firstLetter.slice(1)
-          setUserName(remLetters)
+        if (user.displayName == null) {
+          const firstLetter = user.email.substring(0, user.email.indexOf("@"));
+          const remLetters =
+            firstLetter.charAt(0).toUpperCase() + firstLetter.slice(1);
+          setUserName(remLetters);
         } else {
-          setUserName(user.displayName)
+          setUserName(user.displayName);
         }
         // console.log(user);
         // const uid = user.uid;
@@ -46,12 +48,11 @@ const Header = () => {
           })
         );
       } else {
-        setUserName("")
-        dispath(REMOVE_ACTIVE_USER())
-        
+        setUserName("");
+        dispath(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispath, userName]);
 
   const logoutUser = () => {
     signOut(auth)
@@ -66,7 +67,6 @@ const Header = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="h-[60px] sm:h-[80px] bg-black text-white ">
         <div className="flex justify-between px-6 sm:px-20 items-center h-full ">
           <div>
@@ -85,22 +85,27 @@ const Header = () => {
           </div>
           <div className="lg:flex items-center text-[20px] hidden ">
             <span className="flex">
-              <NavLink className={activeLink} to="/login">
-                <p className="px-2 hover:text-orange-600">Login</p>
-              </NavLink>
-              <div className="flex hover:text-orange-600 px-2 items-center justify-center">
-                <FaUserCircle />
-                <p>Hi, {userName}</p>
-              </div>
-              <NavLink className={activeLink} to="/register">
-                <p className="px-2 hover:text-orange-600">Register</p>
-              </NavLink>
-              <NavLink className={activeLink} to="/order">
-                <p className="px-2 hover:text-orange-600">My Orders</p>
-              </NavLink>
-              <NavLink onClick={logoutUser}>
-                <p className="px-2 hover:text-orange-600">Logout</p>
-              </NavLink>
+              <ShowOnLogout>
+                <NavLink className={activeLink} to="/login">
+                  <p className="px-2 hover:text-orange-600">Login</p>
+                </NavLink>
+              </ShowOnLogout>
+              <ShowOnLogin>
+                <div className="flex text-orange-600 px-2 items-center justify-center">
+                  <FaUserCircle />
+                  <p>Hi, {userName}</p>
+                </div>
+              </ShowOnLogin>
+              <ShowOnLogin>
+                <NavLink className={activeLink} to="/order">
+                  <p className="px-2 hover:text-orange-600">My Orders</p>
+                </NavLink>
+              </ShowOnLogin>
+              <ShowOnLogin>
+                <NavLink onClick={logoutUser}>
+                  <p className="px-2 hover:text-orange-600">Logout</p>
+                </NavLink>
+              </ShowOnLogin>
             </span>
             <span className="flex items-center px-2 relative hover:text-orange-600 ">
               <FaShoppingCart />
@@ -133,64 +138,77 @@ const Header = () => {
               />
               <ul className="px-4">
                 <li className="py-6 text-2xl">
-                  <a href="./" className="cursor-pointer text-orange-600">
+                  <Link
+                    onClick={navClick}
+                    to="./"
+                    className="cursor-pointer text-orange-600"
+                  >
                     SOTshop
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <li className="py-3 text-lg">
-                  <a
-                    href="./register"
+                  <Link
+                    onClick={navClick}
+                    to="./"
                     className="cursor-pointer hover:text-orange-600"
                   >
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <li className="py-3 text-lg">
-                  <a
-                    href="./register"
+                  <Link
+                    onClick={navClick}
+                    to="./contact"
                     className="cursor-pointer hover:text-orange-600"
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <li className="py-3 text-lg">
-                  <a
-                    href="./register"
+                  <Link
+                    onClick={navClick}
+                    to="./login"
                     className="cursor-pointer hover:text-orange-600"
                   >
                     Login
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <li className="py-3 text-lg">
-                  <a
-                    href="./register"
+                  <Link
+                    onClick={navClick}
+                    to="./register"
                     className="cursor-pointer hover:text-orange-600"
                   >
                     Register
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <hr />
                 <li className="py-3 text-lg">
-                  <a
-                    href="/login"
+                  <Link
+                    onClick={navClick}
+                    to="/orders"
                     className="cursor-pointer hover:text-orange-600"
                   >
                     My Orders
-                  </a>
+                  </Link>
                 </li>
                 <hr />
                 <li className="py-3">
-                  <span className="flex items-center pr-4 relative hover:text-orange-600 ">
+                  <Link
+                    onClick={navClick}
+                    to="/cart"
+                    className="flex items-center pr-4 relative hover:text-orange-600 "
+                  >
                     <FaShoppingCart size={20} />
                     <p className="absolute top-[-15px] left-[20px] text-[15px]">
                       1
                     </p>
-                  </span>
+                  </Link>
                 </li>
               </ul>
             </div>

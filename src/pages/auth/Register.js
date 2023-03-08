@@ -34,7 +34,6 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="w-full h-full">
         <div className="w-full flex items-center justify-center px-10 h-[100vh]">
           <div className=" shadow-xl rounded-xl w-auto">
