@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../../firebase/config";
 import {
@@ -37,9 +37,6 @@ const Header = () => {
         } else {
           setUserName(user.displayName);
         }
-        // console.log(user);
-        // const uid = user.uid;
-        // console.log(user.displayName);
         dispath(
           SET_ACTIVE_USER({
             email: user.email,
