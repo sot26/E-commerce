@@ -10,6 +10,8 @@ import Home from "./pages/home/Home";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./pages/admin/Admin";
+import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
 
 function App() {
   return (
@@ -24,6 +26,14 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/order" element={<OrderHistory />} />
           <Route path="/reset" element={<Reset />} />
+          <Route
+            path="/admin/*"
+            element={
+              <AdminOnlyRoute>
+                <Admin />
+              </AdminOnlyRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

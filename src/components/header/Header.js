@@ -10,6 +10,9 @@ import {
   SET_ACTIVE_USER,
   REMOVE_ACTIVE_USER,
 } from "../../redux/slice/authSlice";
+import AdminOnlyRoute, {
+  AdminOnlyLink,
+} from "../adminOnlyRoute/AdminOnlyRoute";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
 
 const Header = () => {
@@ -72,7 +75,11 @@ const Header = () => {
             </p>
           </div>
           <div className="lg:flex items-center text-[20px] hidden">
-            <button className="p-2 bg-blue-700 rounded-lg">Admin</button>
+            <AdminOnlyLink>
+              <Link to="/admin/home">
+                <button className="p-2 bg-blue-700 rounded-lg">Admin</button>
+              </Link>
+            </AdminOnlyLink>
             <NavLink className={activeLink} to="/">
               <div className="px-3 hover:text-orange-600">Home</div>
             </NavLink>
@@ -111,20 +118,29 @@ const Header = () => {
           </div>
 
           {/* mobile menu */}
-          <div className="flex lg:hidden">
-            <span className="flex items-center pr-4 relative hover:text-orange-600 ">
-              <FaShoppingCart size={20} />
-              <p className="absolute top-[-15px] right-[5px] text-[18px]">1</p>
-            </span>
-            <div className=" z-20 px-2">
-              <FaBars size={20} className="cursor-pointer" onClick={navClick} />
+          {!nav ? (
+            <div className="flex lg:hidden">
+              <span className="flex items-center pr-4 relative hover:text-orange-600 ">
+                <FaShoppingCart size={20} />
+                <p className="absolute top-[-15px] right-[5px] text-[18px]">
+                  1
+                </p>
+              </span>
+              <div className=" px-2">
+                <FaBars
+                  size={20}
+                  className="cursor-pointer"
+                  onClick={navClick}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
+
           <div
             className={
               !nav
                 ? "hidden"
-                : "absolute top-0 left-0 w-full h-[100vh] text-white  shadow-md font-bold shadow-[#354259] flex"
+                : "absolute  duration-500 ease-in-out top-0 left-0 w-full h-[100vh] text-white  shadow-md font-bold shadow-[#354259] flex"
             }
           >
             <div className="bg-black w-[300px] h-[100vh] z-10 relative">
@@ -211,7 +227,7 @@ const Header = () => {
             </div>
             <div
               onClick={navClick}
-              className="w-full h-[100vh] bg-black opacity-50 "
+              className="relative w-full h-full bg-black opacity-50 z-10"
             ></div>
           </div>
         </div>

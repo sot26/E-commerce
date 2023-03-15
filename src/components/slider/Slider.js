@@ -71,7 +71,7 @@ const Slider = () => {
         <div className="w-full h-full">
           <div
             style={{ backgroundImage: `url(${slides[currentSlide].url})` }}
-            className="bg-cover h-full w-full duration-500 ease-in-out "
+            className="bg-cover bg-center h-full w-full duration-500 ease-in-out "
           ></div>
           <div className="absolute top-[25.5vh] right-10 left-10 sm:right-[100px] sm:left-[100px] lg:right-[200px] lg:left-[200px] xl:right-[300px] xl:left-[300px]  text-white bg-black/40 items-center justify-center">
             <div className="p-[10px] md:p-[30px] flex flex-col items-center justify-center">
