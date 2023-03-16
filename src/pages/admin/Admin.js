@@ -8,7 +8,7 @@ import ViewProducts from "../../components/admin/viewProducts/ViewProducts";
 
 const Admin = () => {
   return (
-    <div className="w-full h-[85vh] flex">
+    <div className="w-full h-full flex">
       <div className="w-[25%] h-full">
         <Navbar />
       </div>
