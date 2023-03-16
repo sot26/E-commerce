@@ -10,9 +10,7 @@ import {
   SET_ACTIVE_USER,
   REMOVE_ACTIVE_USER,
 } from "../../redux/slice/authSlice";
-import AdminOnlyRoute, {
-  AdminOnlyLink,
-} from "../adminOnlyRoute/AdminOnlyRoute";
+import { AdminOnlyLink } from "../adminOnlyRoute/AdminOnlyRoute";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
 
 const Header = () => {
@@ -33,7 +31,7 @@ const Header = () => {
       if (user) {
         // console.log(user);
         if (user.displayName == null) {
-          const u1 = user.email.slice(0, -10);
+          const u1 = user.email.substring(0, user.email.indexOf("@"));
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
           setdisplayName(uName);
           console.log(user);

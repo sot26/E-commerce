@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { selectEmail, selectUserName } from "../../../redux/slice/authSlice";
+import { selectUserName } from "../../../redux/slice/authSlice";
 
 const Navbar = () => {
   const userName = useSelector(selectUserName);
