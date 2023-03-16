@@ -17,11 +17,10 @@ import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [displayName, setdisplayName] = useState("");
   const navigate = useNavigate();
 
-  const dispath = useDispatch();
-
+  const dispatch = useDispatch();
   function navClick() {
     setNav(!nav);
   }
@@ -32,27 +31,29 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        // console.log(user);
         if (user.displayName == null) {
-          const firstLetter = user.email.substring(0, user.email.indexOf("@"));
-          const remLetters =
-            firstLetter.charAt(0).toUpperCase() + firstLetter.slice(1);
-          setUserName(remLetters);
+          const u1 = user.email.slice(0, -10);
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          setdisplayName(uName);
+          console.log(user);
         } else {
-          setUserName(user.displayName);
+          setdisplayName(user.displayName);
         }
-        dispath(
+
+        dispatch(
           SET_ACTIVE_USER({
             email: user.email,
-            userName: user.displayName ? user.displayName : setUserName,
+            userName: user.displayName ? user.displayName : displayName,
             userID: user.uid,
           })
         );
       } else {
-        setUserName("");
-        dispath(REMOVE_ACTIVE_USER());
+        setdisplayName("");
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, [dispath, userName]);
+  }, [dispatch, displayName]);
 
   const logoutUser = () => {
     signOut(auth)
@@ -97,7 +98,7 @@ const Header = () => {
               <ShowOnLogin>
                 <div className="flex text-orange-600 px-2 items-center justify-center">
                   <FaUserCircle />
-                  <p>Hi, {userName}</p>
+                  <p>Hi, {displayName}</p>
                 </div>
               </ShowOnLogin>
               <ShowOnLogin>
