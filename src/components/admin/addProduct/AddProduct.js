@@ -1,4 +1,7 @@
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { storage } from "../../../firebase/config";
 
 const AddProduct = () => {
   const categories = [
@@ -10,17 +13,44 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     imageURL: "",
-    price: null,
+    price: 0,
     category: "",
     brand: "",
     desc: "",
   });
 
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
+    console.log(handleImageChange);
   };
-  const handleImageChange = (e) => {};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    // console.log(file);
+    const storageRef = ref(storage, `sot-shop/${Date.now()} ${file.name}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (error) => {
+        toast.error(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setProduct({ ...product, imageURL: downloadURL });
+          toast.success("image uploaded successfully");
+        });
+      }
+    );
+  };
 
   const addProduct = (e) => {
     e.preventDefault();
@@ -50,16 +80,21 @@ const AddProduct = () => {
         <div>
           <p>Product Image:</p>
           <div className="group w-full border-2 rounded-2xl">
-            <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 my-3">
-              <div
-                className="bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-7"
-                style={{ width: "45%" }}
-              >
-                45%
+            {uploadProgress === 0 ? null : (
+              <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 my-3">
+                <div
+                  className="bg-blue-600 text-lg font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-7"
+                  style={{ width: `${uploadProgress}%` }}
+                >
+                  {uploadProgress < 100
+                    ? `uploading ${uploadProgress}%`
+                    : `upload complete ${uploadProgress}%`}
+                </div>
               </div>
-            </div>
+            )}
+
             <input
-              className="border-[3px] rounded-xl w-full p-3 h-[40px]"
+              className="border-[3px] rounded-xl w-full py-3 h-[40px]"
               type="file"
               accept="image/*"
               name="image"
@@ -67,15 +102,17 @@ const AddProduct = () => {
               onChange={(e) => handleImageChange(e)}
             />
 
-            <input
-              type="text"
-              // required
-              placeholder="Image URL"
-              name="imageURL"
-              value={product.imageURL}
-              disabled
-              className="border-[3px] rounded-xl w-full my-2 p-3 h-[30px]"
-            />
+            {product.imageURL === "" ? null : (
+              <input
+                type="text"
+                // required
+                placeholder="Image URL"
+                name="imageURL"
+                value={product.imageURL}
+                disabled
+                className="border-[3px] rounded-xl w-full my-2 p-3 h-[30px]"
+              />
+            )}
           </div>
         </div>
         <div className="py-2">
