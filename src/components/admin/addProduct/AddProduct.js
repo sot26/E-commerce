@@ -1,6 +1,7 @@
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
 
@@ -11,6 +12,8 @@ const AddProduct = () => {
     { id: 3, name: "Fashion" },
     { id: 4, name: "Phone" },
   ];
+
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     name: "",
     imageURL: "",
@@ -60,7 +63,7 @@ const AddProduct = () => {
     try {
       const docRef = addDoc(collection(db, "products"), {
         name: product.name,
-        price: product.price,
+        price: Number(product.price),
         imageURL: product.imageURL,
         category: product.category,
         brand: product.brand,
@@ -68,6 +71,7 @@ const AddProduct = () => {
         createdAt: Timestamp.now().toDate(),
       });
       toast.success("Product has been uploaded successfully");
+      navigate("/admin/view-products");
     } catch (error) {
       toast.error(error.message);
     }
@@ -152,12 +156,17 @@ const AddProduct = () => {
             value={product.category}
             onChange={(e) => handleInputChange(e)}
           >
-            <option disabled className="text-xl">
+            <option disabled value="" className="text-xl">
               -- Choose product category --
             </option>
             {categories.map((cat) => {
               return (
-                <option className="text-xl" value={cat.name} key={cat.id}>
+                <option
+                  required
+                  className="text-xl"
+                  value={cat.name}
+                  key={cat.id}
+                >
                   {cat.name}
                 </option>
               );
