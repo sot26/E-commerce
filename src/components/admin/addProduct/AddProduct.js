@@ -1,7 +1,8 @@
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { storage } from "../../../firebase/config";
+import { db, storage } from "../../../firebase/config";
 
 const AddProduct = () => {
   const categories = [
@@ -55,6 +56,21 @@ const AddProduct = () => {
   const addProduct = (e) => {
     e.preventDefault();
     console.log(product);
+
+    try {
+      const docRef = addDoc(collection(db, "products"), {
+        name: product.name,
+        price: product.price,
+        imageURL: product.imageURL,
+        category: product.category,
+        brand: product.brand,
+        description: product.desc,
+        createdAt: Timestamp.now().toDate(),
+      });
+      toast.success("Product has been uploaded successfully");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
