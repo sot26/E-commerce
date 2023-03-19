@@ -125,7 +125,7 @@ const AddProduct = () => {
             {product.imageURL === "" ? null : (
               <input
                 type="text"
-                // required
+                required
                 placeholder="Image URL"
                 name="imageURL"
                 value={product.imageURL}
