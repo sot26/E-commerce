@@ -1,9 +1,18 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
+import Notiflix from "notiflix";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { db } from "../../../firebase/config";
+import { db, storage } from "../../../firebase/config";
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
@@ -25,6 +34,38 @@ const ViewProducts = () => {
         setProducts(allProduct);
         console.log(allProduct);
       });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const confirmDelete = (id, imageURL) => {
+    Notiflix.Confirm.show(
+      "Delete Product??",
+      "You are about to delete this product",
+      "Confirm",
+      "Cancle",
+      function okCb() {
+        deleteProduct(id, imageURL);
+      },
+      function cancelCb() {},
+      {
+        width: "320px",
+        borderRadius: "8px",
+        titleColor: "orangered",
+        okButtonBackground: "orangered",
+        cssAnimation: "zoom",
+        // etc...
+      }
+    );
+  };
+
+  const deleteProduct = async (id, imageURL) => {
+    try {
+      await deleteDoc(doc(db, "products", id));
+      const imageRef = ref(storage, imageURL);
+      await deleteObject(imageRef);
+      toast.success("Product deleted successfully");
     } catch (error) {
       toast.error(error.message);
     }
@@ -51,10 +92,10 @@ const ViewProducts = () => {
                 </tr>
               </thead>
               {products.map((product, index) => {
-                const { name, price, imageURL, category } = product;
+                const { name, id, price, imageURL, category } = product;
 
                 return (
-                  <tbody key={index}>
+                  <tbody key={id}>
                     <tr className="text-xl font-medium shadow-md">
                       <td>{index + 1}</td>
                       <td>
@@ -71,7 +112,12 @@ const ViewProducts = () => {
                         <Link to="/admin/add-product">
                           <FaEdit color="green" className="mr-4" size={20} />
                         </Link>
-                        <FaTrashAlt color="red" size={20} />
+                        <FaTrashAlt
+                          className="cursor-pointer"
+                          color="red"
+                          size={20}
+                          onClick={() => confirmDelete(id, imageURL)}
+                        />
                       </td>
                     </tr>
                   </tbody>
