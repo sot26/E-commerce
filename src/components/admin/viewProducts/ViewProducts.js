@@ -80,7 +80,7 @@ const ViewProducts = () => {
           {products.length === 0 ? (
             <p>No product found</p>
           ) : (
-            <table className="w-full mx-2">
+            <table className="w-full">
               <thead>
                 <tr className="text-3xl font-medium border-t-[3px] border-b-[3px] border-blue-300">
                   <td className="border-r-2">s/n</td>
