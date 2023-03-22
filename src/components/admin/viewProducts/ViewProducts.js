@@ -10,13 +10,15 @@ import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
+import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     getProduct();
   }, []);
@@ -32,7 +34,12 @@ const ViewProducts = () => {
           ...doc.data(),
         }));
         setProducts(allProduct);
-        console.log(allProduct);
+        // console.log(allProduct);
+        dispatch(
+          STORE_PRODUCTS({
+            products: allProduct,
+          })
+        );
       });
     } catch (error) {
       toast.error(error.message);
