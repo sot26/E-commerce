@@ -1,29 +1,45 @@
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
+import { selectProduct } from "../../../redux/slice/productSlice";
+
+const categories = [
+  { id: 1, name: "Laptop" },
+  { id: 2, name: "Electronics" },
+  { id: 3, name: "Fashion" },
+  { id: 4, name: "Phone" },
+];
+
+const initialState = {
+  name: "",
+  imageURL: "",
+  price: 0,
+  category: "",
+  brand: "",
+  desc: "",
+};
 
 const AddProduct = () => {
-  const categories = [
-    { id: 1, name: "Laptop" },
-    { id: 2, name: "Electronics" },
-    { id: 3, name: "Fashion" },
-    { id: 4, name: "Phone" },
-  ];
-
   const navigate = useNavigate();
-  const [product, setProduct] = useState({
-    name: "",
-    imageURL: "",
-    price: 0,
-    category: "",
-    brand: "",
-    desc: "",
-  });
+  const { id } = useParams();
+
+  function detectParam(id, function1, function2) {
+    if (id === "ADD") {
+      return function1;
+    } else {
+      return function2;
+    }
+  }
+  console.log(id);
+  const [product, setProduct] = useState({ ...initialState });
 
   const [uploadProgress, setUploadProgress] = useState(0);
+  const products = useSelector(selectProduct);
+  console.log(products);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +72,13 @@ const AddProduct = () => {
     );
   };
 
+  const editProduct = (e) => {
+    e.preventDefault();
+    try {
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   const addProduct = (e) => {
     e.preventDefault();
     console.log(product);
@@ -71,6 +94,8 @@ const AddProduct = () => {
         createdAt: Timestamp.now().toDate(),
       });
       toast.success("Product has been uploaded successfully");
+      setUploadProgress(0);
+      setProduct({ ...initialState });
       navigate("/admin/view-products");
     } catch (error) {
       toast.error(error.message);
@@ -81,10 +106,10 @@ const AddProduct = () => {
     <div className="px-[40px] pb-[40px]  max-w-[800px]">
       <div>
         <p className="py-5 text-3xl text-center font-semibold">
-          Add New Product
+          {detectParam(id, "Add New Product", "Edit Product")}
         </p>
       </div>
-      <form onSubmit={addProduct}>
+      <form onSubmit={detectParam(id, addProduct, editProduct)}>
         <div className="py-2 ">
           <p className="text-2xl pb-2">Product Name</p>
           <input
@@ -114,7 +139,7 @@ const AddProduct = () => {
             )}
 
             <input
-              className="border-[3px] rounded-xl w-full py-3 h-[40px]"
+              className="border-[1px] rounded-xl w-full p-3 h-[40px] cursor-pointer"
               type="file"
               accept="image/*"
               name="image"
@@ -198,7 +223,7 @@ const AddProduct = () => {
           />
         </div>
         <button className="p-3 text-white text-xl bg-blue-700 rounded-lg">
-          Save Product
+          {detectParam(id, "Save Product", "Edit Product")}
         </button>
       </form>
     </div>
