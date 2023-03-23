@@ -20,7 +20,7 @@ const Navbar = () => {
           <NavLink to="/admin/home" className={activeLink}>
             <p className="p-4 border-b-[4px] w-full">Home</p>
           </NavLink>
-          <NavLink to="/admin/add-product" className={activeLink}>
+          <NavLink to="/admin/add-product/ADD" className={activeLink}>
             <p className="p-4 border-b-[4px] w-full">Add Product</p>
           </NavLink>
           <NavLink to="/admin/view-products" className={activeLink}>

@@ -116,7 +116,7 @@ const ViewProducts = () => {
                       <td>{category}</td>
                       <td>{`$${price}`}</td>
                       <td className="flex pt-16">
-                        <Link to="/admin/add-product">
+                        <Link to={`/admin/add-product/${id}`}>
                           <FaEdit color="green" className="mr-4" size={20} />
                         </Link>
                         <FaTrashAlt
