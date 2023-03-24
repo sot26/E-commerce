@@ -1,5 +1,10 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,6 +31,16 @@ const initialState = {
 const AddProduct = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  // console.log(id);
+  const products = useSelector(selectProduct);
+  console.log(products);
+  const productEdit = products.find((item) => item.id === id);
+  console.log(productEdit);
+  const [product, setProduct] = useState(() => {
+    const newState = detectParam(id, { ...initialState }, productEdit);
+    return newState;
+  });
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   function detectParam(id, function1, function2) {
     if (id === "ADD") {
@@ -34,12 +49,6 @@ const AddProduct = () => {
       return function2;
     }
   }
-  console.log(id);
-  const [product, setProduct] = useState({ ...initialState });
-
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const products = useSelector(selectProduct);
-  console.log(products);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +83,24 @@ const AddProduct = () => {
 
   const editProduct = (e) => {
     e.preventDefault();
+
+    if (product.imageURL !== productEdit.imageURL) {
+      const imageRef = ref(storage, productEdit.imageURL);
+      deleteObject(imageRef);
+    }
     try {
+      setDoc(doc(db, "products", id), {
+        name: product.name,
+        price: Number(product.price),
+        imageURL: product.imageURL,
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: productEdit.createdAt,
+        editedAt: Timestamp.now().toDate(),
+      });
+      navigate("/admin/view-products");
+      toast.success("Product edited successfully");
     } catch (error) {
       toast.error(error.message);
     }
@@ -90,7 +116,7 @@ const AddProduct = () => {
         imageURL: product.imageURL,
         category: product.category,
         brand: product.brand,
-        description: product.desc,
+        desc: product.desc,
         createdAt: Timestamp.now().toDate(),
       });
       toast.success("Product has been uploaded successfully");

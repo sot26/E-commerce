@@ -34,7 +34,7 @@ const Header = () => {
           const u1 = user.email.substring(0, user.email.indexOf("@"));
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
           setdisplayName(uName);
-          console.log(user);
+          // console.log(user);
         } else {
           setdisplayName(user.displayName);
         }
