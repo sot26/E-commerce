@@ -80,7 +80,7 @@ const ViewProducts = () => {
   return (
     <div>
       <div className="w-full min-h-[85vh]">
-        <div className="w-full text-center pt-10 text-4xl font-bold">
+        <div className="w-full text-center pt-4 md:pt-10 text-3xl pb-2 md:text-4xl font-semibold md:font-bold">
           View products
         </div>
         <div>
@@ -89,7 +89,7 @@ const ViewProducts = () => {
           ) : (
             <table className="w-full">
               <thead>
-                <tr className="text-3xl font-medium border-t-[3px] border-b-[3px] border-blue-300">
+                <tr className="text-[10px] md:text-3xl font-bold border-t-[3px] border-b-[3px] border-blue-300">
                   <td className="border-r-2">s/n</td>
                   <td className="border-r-2">Image</td>
                   <td className="border-r-2">Product name</td>
@@ -103,26 +103,28 @@ const ViewProducts = () => {
 
                 return (
                   <tbody key={id}>
-                    <tr className="text-xl font-medium shadow-md">
-                      <td>{index + 1}</td>
-                      <td>
+                    <tr className="text-md sm:text-xl font-medium shadow-md">
+                      <td className="text-sm border-r-2">{index + 1}</td>
+                      <td className="border-r-2">
                         <img
-                          className="h-[100px] w-auto my-2"
+                          className="w-[80px] md:h-[100px] w-auto my-2"
                           src={imageURL}
                           alt={name}
                         />
                       </td>
-                      <td>{name}</td>
-                      <td>{category}</td>
-                      <td>{`$${price}`}</td>
-                      <td className="flex pt-16">
+                      <td className="text-sm border-r-2">{name}</td>
+                      <td className="text-sm border-r-2">{category}</td>
+                      <td className="text-sm border-r-2">{`$${price}`}</td>
+                      <td className="flex pt-8 md:pt-16">
                         <Link to={`/admin/add-product/${id}`}>
-                          <FaEdit color="green" className="mr-4" size={20} />
+                          <FaEdit
+                            color="green"
+                            className="text-lg md:text-3xl cursor-pointer mr-2 md:mr-4"
+                          />
                         </Link>
                         <FaTrashAlt
-                          className="cursor-pointer"
+                          className="text-lg md:text-3xl cursor-pointer"
                           color="red"
-                          size={20}
                           onClick={() => confirmDelete(id, imageURL)}
                         />
                       </td>

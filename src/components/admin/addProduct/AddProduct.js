@@ -129,15 +129,15 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="px-[40px] pb-[40px]  max-w-[800px]">
+    <div className="px-[10px] md:px-[40px] pb-[40px] min-h-[85vh]  max-w-[800px]">
       <div>
-        <p className="py-5 text-3xl text-center font-semibold">
+        <p className="py-5 text-2xl md:text-3xl text-center font-semibold">
           {detectParam(id, "Add New Product", "Edit Product")}
         </p>
       </div>
       <form onSubmit={detectParam(id, addProduct, editProduct)}>
         <div className="py-2 ">
-          <p className="text-2xl pb-2">Product Name</p>
+          <p className="text-xl md:text-2xl pb-2">Product Name</p>
           <input
             className="border-[3px] rounded-xl w-full p-3 h-[40px]"
             type="text"
@@ -149,7 +149,7 @@ const AddProduct = () => {
           />
         </div>
         <div>
-          <p>Product Image:</p>
+          <p className="text-xl md:text-2xl pb-2">Product Image</p>
           <div className="group w-full border-2 rounded-2xl">
             {uploadProgress === 0 ? null : (
               <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 my-3">
@@ -187,7 +187,7 @@ const AddProduct = () => {
           </div>
         </div>
         <div className="py-2">
-          <p className="text-2xl pb-2">Product Price</p>
+          <p className="text-xl md:text-2xl pb-2">Product Price</p>
           <input
             className="border-[3px] rounded-xl w-full p-3 h-[40px]"
             type="number"
@@ -199,7 +199,7 @@ const AddProduct = () => {
           />
         </div>
         <div className="py-2">
-          <p className="text-2xl pb-2">Product Category</p>
+          <p className="text-xl md:text-2xl pb-2">Product Category</p>
           <select
             className="border-[3px] rounded-xl w-full p-3 h-[40px]"
             required
@@ -225,7 +225,7 @@ const AddProduct = () => {
           </select>
         </div>
         <div className="py-2">
-          <p className="text-2xl pb-2">Product Company/Brand</p>
+          <p className="text-xl md:text-2xl pb-2">Product Company/Brand</p>
           <input
             className="border-[3px] rounded-xl w-full p-3 h-[40px]"
             type="text"
@@ -237,7 +237,7 @@ const AddProduct = () => {
           />
         </div>
         <div className="py-2">
-          <p className="text-2xl pb-2">Product Description</p>
+          <p className="text-xl md:text-2xl pb-2">Product Description</p>
           <textarea
             className="border-[3px] rounded-xl w-full p-3 h-[150px]"
             type="text"
@@ -248,7 +248,7 @@ const AddProduct = () => {
             onChange={(e) => handleInputChange(e)}
           />
         </div>
-        <button className="p-3 text-white text-xl bg-blue-700 rounded-lg">
+        <button className="p-3 text-white text-lg md:text-xl bg-blue-700 rounded-lg">
           {detectParam(id, "Save Product", "Edit Product")}
         </button>
       </form>
