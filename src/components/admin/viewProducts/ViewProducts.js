@@ -103,18 +103,18 @@ const ViewProducts = () => {
 
                 return (
                   <tbody key={id}>
-                    <tr className="text-md sm:text-xl font-medium shadow-md">
-                      <td className="text-sm border-r-2">{index + 1}</td>
+                    <tr className="text-md sm:text-xl md:text-[20px] font-medium shadow-md">
+                      <td className=" border-r-2">{index + 1}</td>
                       <td className="border-r-2">
                         <img
-                          className="w-[80px] md:h-[100px] w-auto my-2"
+                          className="w-[80px] md:w-[100px] w-auto my-2"
                           src={imageURL}
                           alt={name}
                         />
                       </td>
-                      <td className="text-sm border-r-2">{name}</td>
-                      <td className="text-sm border-r-2">{category}</td>
-                      <td className="text-sm border-r-2">{`$${price}`}</td>
+                      <td className=" border-r-2">{name}</td>
+                      <td className=" border-r-2">{category}</td>
+                      <td className=" border-r-2">{`$${price}`}</td>
                       <td className="flex pt-8 md:pt-16">
                         <Link to={`/admin/add-product/${id}`}>
                           <FaEdit

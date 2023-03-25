@@ -18,7 +18,7 @@ const Navbar = () => {
             {userName}
           </p>
         </div>
-        <div className="text-md md:text-lg">
+        <div className="text-md md:text-lg lg:text-xl">
           <NavLink to="/admin/home" className={activeLink}>
             <p className="p-2 md:p-4 border-b-[4px] w-full">Home</p>
           </NavLink>
