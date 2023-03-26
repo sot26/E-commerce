@@ -10,41 +10,29 @@ import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import useFetchCollection from "../../../customHooks/useFetchCollection";
 import { db, storage } from "../../../firebase/config";
-import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
+import {
+  selectProduct,
+  STORE_PRODUCTS,
+} from "../../../redux/slice/productSlice";
 
 const ViewProducts = () => {
-  const [products, setProducts] = useState([]);
+  const { data } = useFetchCollection("products");
+  const products = useSelector(selectProduct);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    getProduct();
-  }, []);
-
-  const getProduct = () => {
-    try {
-      const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("createdAt", "desc"));
-
-      onSnapshot(q, (querySnapshot) => {
-        const allProduct = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setProducts(allProduct);
-        // console.log(allProduct);
-        dispatch(
-          STORE_PRODUCTS({
-            products: allProduct,
-          })
-        );
-      });
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+    dispatch(
+      STORE_PRODUCTS({
+        products: data,
+      })
+    );
+  }, [dispatch, data]);
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
