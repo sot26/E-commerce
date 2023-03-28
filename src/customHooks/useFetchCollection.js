@@ -17,7 +17,7 @@ const useFetchCollection = (collectionName) => {
           ...doc.data(),
         }));
         setData(allData);
-        console.log(allData);
+        // console.log(allData);
       });
     } catch (error) {
       toast.error(error.message);
