@@ -95,7 +95,7 @@ const ViewProducts = () => {
                       <td className=" border-r-2">{index + 1}</td>
                       <td className="border-r-2">
                         <img
-                          className="w-[80px] md:w-[100px] w-auto my-2"
+                          className="w-[80px] md:w-[100px] my-2"
                           src={imageURL}
                           alt={name}
                         />
