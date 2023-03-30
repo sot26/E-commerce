@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
+import Search from "../../search/Search";
 
 const ProductList = () => {
   const [grid, setGrid] = useState(true);
+  const [search, setSearch] = useState("");
   return (
     <>
-      <div className="w-full h-auto mb-2 flex justify-between text-xl shadow-lg">
+      <div className="w-full h-auto mb-2 flex justify-between items-center text-xl shadow-lg text-center">
         <div className="flex ">
           <BsFillGridFill
             className="mr-2"
@@ -20,10 +22,10 @@ const ProductList = () => {
           </p>
         </div>
         <div>
-          <p>search</p>
+          <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
-        <div className="flex font-bold">
-          <p>Sort by:</p>
+        <div className="flex ">
+          <p className="font-bold">Sort by:</p>
           <select>
             <option value="latest">Latset</option>
             <option value="lowest-price">Lowest Price</option>
