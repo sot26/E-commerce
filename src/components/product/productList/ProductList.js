@@ -8,16 +8,21 @@ const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
   return (
-    <>
+    <div>
       <div className="w-full h-auto mb-2 flex justify-between items-center text-xl shadow-lg text-center">
         <div className="flex ">
           <BsFillGridFill
-            className="mr-2"
+            className="mr-2 cursor-pointer"
             size={22}
             color="orangered"
             onClick={() => setGrid(true)}
           />
-          <FaListAlt size={24} color="blue" onClick={() => setGrid(false)} />
+          <FaListAlt
+            className="cursor-pointer"
+            size={24}
+            color="blue"
+            onClick={() => setGrid(false)}
+          />
           <p className=" px-3">
             <span className="font-bold">10</span> Products found
           </p>
@@ -35,23 +40,23 @@ const ProductList = ({ products }) => {
             <option value="z-a">Z-A</option>
           </select>
         </div>
-        <div className={grid ? "grid grid-cols-3" : "block"}>
-          {products.lenght === 0 ? (
-            <p>No Product found</p>
-          ) : (
-            <>
-              {products.map((product) => {
-                return (
-                  <div key={product.id}>
-                    <ProductItem {...product} product={product} grid={grid} />
-                  </div>
-                );
-              })}
-            </>
-          )}
-        </div>
       </div>
-    </>
+      <div className={grid ? "grid grid-cols-3" : "block"}>
+        {products.lenght === 0 ? (
+          <p>No Product found</p>
+        ) : (
+          <>
+            {products.map((product) => {
+              return (
+                <div key={product.id}>
+                  <ProductItem {...product} product={product} grid={grid} />
+                </div>
+              );
+            })}
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 
