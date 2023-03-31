@@ -47,6 +47,7 @@ const ProductList = ({ products }) => {
         ) : (
           <>
             {products.map((product) => {
+              console.log(product);
               return (
                 <div key={product.id}>
                   <ProductItem {...product} product={product} grid={grid} />
