@@ -23,10 +23,10 @@ const Product = () => {
   return (
     <div className="h-full w-full">
       <div className="w-full flex ">
-        <div className="w-[25%]">
+        <div className="w-[30%]">
           <ProductFilter />
         </div>
-        <div className="w-[75%]">
+        <div className="w-[70%] mx-9">
           <ProductList products={products} />
         </div>
       </div>
