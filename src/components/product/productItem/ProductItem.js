@@ -10,7 +10,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
     return text;
   };
   return (
-    <div className={grid ? "grid grid-col" : "block"}>
+    <div className={grid ? "grid grid-col" : "block my-2 shadow-md"}>
       <div
         className={
           grid
@@ -26,7 +26,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
         <div className="my-4">
           <p className="text-2xl text-orange-500 font-bold">{`$${price}`}</p>
           <p className="text-3xl font-semibold">{shortenText(name, 18)}</p>
-          {grid ? null : <p className="text-xl">{shortenText(desc, 500)}</p>}
+          {!grid && <p className="text-xl">{shortenText(desc, 500)}</p>}
         </div>
       </div>
     </div>
