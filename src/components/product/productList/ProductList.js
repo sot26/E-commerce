@@ -41,7 +41,9 @@ const ProductList = ({ products }) => {
           </select>
         </div>
       </div>
-      <div className={grid ? "grid grid-cols-3 gap-20" : "block "}>
+      <div
+        className={grid ? "grid grid-cols-2 md:grid-cols-3 gap-20" : "block "}
+      >
         {products.lenght === 0 ? (
           <p>No Product found</p>
         ) : (
