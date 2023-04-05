@@ -68,10 +68,12 @@ const Header = () => {
     <>
       <div className="h-[60px] sm:h-[80px] bg-black text-white ">
         <div className="flex justify-between px-6 sm:px-20 items-center h-full ">
-          <div>
-            <p className="text-[20px] sm:text-[20px] lg:text-[30px]  font-semibold">
-              SOTshop
-            </p>
+          <div className="cursor-pointer">
+            <Link to="/">
+              <p className="text-[20px] sm:text-[20px] lg:text-[30px]  font-semibold">
+                SOTshop
+              </p>
+            </Link>
           </div>
           <div className="lg:flex items-center text-[20px] hidden">
             <AdminOnlyLink>
