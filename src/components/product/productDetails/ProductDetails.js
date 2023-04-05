@@ -32,7 +32,7 @@ const ProductDetails = () => {
     <div className="w-ful h-full mx-1 md:mx-24 min-h-[100vh]">
       <div>
         <p className="text-4xl md:text-6xl mt-3 ">Product Details</p>
-        <Link to="/">
+        <Link to="/#products">
           <p className="text-lg my-4 md:text-2xl">&larr; Back to Products</p>
         </Link>
       </div>
@@ -72,7 +72,7 @@ const ProductDetails = () => {
               <p className="mx-1 font-semibold ">1</p>
               <button className="p-1 bg-gray-200">+</button>
             </div>
-            <button className="md:mt-4 mt-2 py-2 px-4 h-[20px] md:h-[35px] md:text-xl text-white bg-orange-500 rounded-xl">
+            <button className="md:mt-4 mt-2 md:py-2 px-4 h-[20px] md:h-[35px] md:text-xl text-white bg-orange-500 rounded-xl">
               ADD TO CART
             </button>
           </div>
