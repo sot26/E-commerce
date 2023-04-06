@@ -23,12 +23,12 @@ const Product = () => {
   }, [dispatch, data]);
 
   return (
-    <div className="h-full w-full">
-      <div className="w-full flex ">
-        <div className="hidden md:flex md:w-[30%]">
+    <div className="h-full w-full lg:px-[50px] pt-6">
+      <div className="w-full flex">
+        <div className="hidden md:flex md:w-[15%]">
           {isLoading ? null : <ProductFilter />}
         </div>
-        <div className="w-full min-h-[100vh] mx-2  md:w-[70%] md:mx-9">
+        <div className="w-full min-h-[100vh] mx-2  md:w-[85%] md:mx-9">
           {isLoading ? (
             <Circles
               height="80"

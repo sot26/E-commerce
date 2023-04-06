@@ -9,8 +9,8 @@ const ProductList = ({ products }) => {
   const [search, setSearch] = useState("");
   return (
     <div>
-      <div className="w-full h-auto pb-2 mb-2 md:flex justify-between items-center text-xl shadow-lg text-center">
-        <div className="flex my-[10px] md:my-0">
+      <div className="w-full h-auto pb-2 mb-2 lg:flex justify-between items-center text-xl shadow-lg text-center">
+        <div className="flex my-[10px] lg:my-0">
           <BsFillGridFill
             className="mr-2 cursor-pointer"
             size={22}
@@ -27,10 +27,10 @@ const ProductList = ({ products }) => {
             <span className="font-bold">10</span> Products found
           </p>
         </div>
-        <div className="my-[10px] md:my-0">
+        <div className="my-[10px] lg:my-0">
           <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
-        <div className="flex my-[10px] md:my-0">
+        <div className="flex my-[10px] lg:my-0">
           <p className="font-bold">Sort by:</p>
           <select>
             <option value="latest">Latset</option>
@@ -43,7 +43,9 @@ const ProductList = ({ products }) => {
       </div>
       <div
         className={
-          grid ? "grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-20" : "block "
+          grid
+            ? "grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 xl:gap-20"
+            : "block "
         }
       >
         {products.lenght === 0 ? (

@@ -36,7 +36,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
         <div className={grid ? "w-full" : "flex flex-col justify-between"}>
           <div className={grid ? "my-4" : "pl-2"}>
             <p className="text-lg md:text-2xl text-orange-500 font-bold">{`$${price}`}</p>
-            <p className="text-[15px] md:text-3xl font-semibold">
+            <p className="text-[15px] md:text-[16px] lg:text-[19px] xl:text-3xl font-semibold">
               {shortenText(name, 18)}
             </p>
             {!grid && (
