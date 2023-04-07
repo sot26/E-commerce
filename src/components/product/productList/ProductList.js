@@ -12,6 +12,7 @@ import {
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
   const filteredProducts = useSelector(selectFilteredProducts);
   console.log(filteredProducts);
 
@@ -47,7 +48,7 @@ const ProductList = ({ products }) => {
         </div>
         <div className="flex my-[10px] lg:my-0">
           <p className="font-bold">Sort by:</p>
-          <select>
+          <select value={sort} onChange={(e) => setSearch(e.target.value)}>
             <option value="latest">Latset</option>
             <option value="lowest-price">Lowest Price</option>
             <option value="highest-price">Highest Price</option>
