@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
 import Search from "../../search/Search";
 import ProductItem from "../productItem/ProductItem";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FILTER_BY_SEARCH,
+  selectFilteredProducts,
+} from "../../../redux/slice/filterSlice";
 
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
+  const filteredProducts = useSelector(selectFilteredProducts);
+  console.log(filteredProducts);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products: products, search: search }));
+  }, [dispatch, search, products]);
+
   return (
     <div>
       <div className="w-full h-auto pb-2 mb-2 lg:flex justify-between items-center text-xl shadow-lg text-center">
@@ -24,7 +38,8 @@ const ProductList = ({ products }) => {
             onClick={() => setGrid(false)}
           />
           <p className=" px-3">
-            <span className="font-bold">10</span> Products found
+            <span className="font-bold">{filteredProducts.length}</span>{" "}
+            Products found
           </p>
         </div>
         <div className="my-[10px] lg:my-0">
@@ -52,8 +67,7 @@ const ProductList = ({ products }) => {
           <p>No Product found</p>
         ) : (
           <>
-            {products.map((product) => {
-              console.log(product);
+            {filteredProducts.map((product) => {
               return (
                 <div key={product.id}>
                   <ProductItem {...product} product={product} grid={grid} />
