@@ -29,7 +29,7 @@ const ProductDetails = () => {
   }, []);
 
   return (
-    <div className="w-ful h-full mx-1 md:mx-24 min-h-[100vh]">
+    <div className="w-ful h-full mx-1 mb-4 md:mx-24 min-h-[80vh]">
       <div>
         <p className="text-4xl md:text-6xl mt-3 ">Product Details</p>
         <Link to="/#products">
@@ -72,7 +72,7 @@ const ProductDetails = () => {
               <p className="mx-1 font-semibold ">1</p>
               <button className="p-1 bg-gray-200">+</button>
             </div>
-            <button className="md:mt-4 mt-2 md:py-2 px-4 h-[20px] md:h-[35px] md:text-xl text-white bg-orange-500 rounded-xl">
+            <button className="md:mt-4 mt-2 md:py-2 px-4 h-[25px] md:h-[35px] md:text-xl text-white bg-orange-500 rounded-lg md:rounded-xl">
               ADD TO CART
             </button>
           </div>

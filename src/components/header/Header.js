@@ -181,49 +181,57 @@ const Header = () => {
                   </Link>
                 </li>
                 <hr />
-                <li className="py-3 text-lg">
-                  <Link
-                    onClick={navClick}
-                    to="./login"
-                    className="cursor-pointer hover:text-orange-600"
-                  >
-                    Login
-                  </Link>
-                </li>
+                <ShowOnLogout>
+                  <li className="py-3 text-lg">
+                    <Link
+                      onClick={navClick}
+                      to="./login"
+                      className="cursor-pointer hover:text-orange-600"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </ShowOnLogout>
                 <hr />
-                <li className="py-3 text-lg">
-                  <Link
-                    onClick={navClick}
-                    to="./register"
-                    className="cursor-pointer hover:text-orange-600"
-                  >
-                    Register
-                  </Link>
-                </li>
-                <hr />
-                <hr />
-                <li className="py-3 text-lg">
-                  <Link
-                    onClick={navClick}
-                    to="/orders"
-                    className="cursor-pointer hover:text-orange-600"
-                  >
-                    My Orders
-                  </Link>
-                </li>
-                <hr />
-                <li className="py-3">
-                  <Link
-                    onClick={navClick}
-                    to="/cart"
-                    className="flex items-center pr-4 relative hover:text-orange-600 "
-                  >
-                    <FaShoppingCart size={20} />
-                    <p className="absolute top-[-15px] left-[20px] text-[15px]">
-                      1
-                    </p>
-                  </Link>
-                </li>
+
+                <ShowOnLogout>
+                  <li className="py-3 text-lg">
+                    <Link
+                      onClick={navClick}
+                      to="./register"
+                      className="cursor-pointer hover:text-orange-600"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                  <hr />
+                </ShowOnLogout>
+                <ShowOnLogin>
+                  <li className="py-3 text-lg">
+                    <Link
+                      onClick={navClick}
+                      to="/orders"
+                      className="cursor-pointer hover:text-orange-600"
+                    >
+                      My Orders
+                    </Link>
+                  </li>
+                </ShowOnLogin>
+                <ShowOnLogin>
+                  <hr />
+                  <li className="py-3">
+                    <Link
+                      onClick={navClick}
+                      to="/cart"
+                      className="flex items-center pr-4 relative hover:text-orange-600 "
+                    >
+                      <FaShoppingCart size={20} />
+                      <p className="absolute top-[-15px] left-[20px] text-[15px]">
+                        1
+                      </p>
+                    </Link>
+                  </li>
+                </ShowOnLogin>
               </ul>
             </div>
             <div
