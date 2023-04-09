@@ -23,11 +23,13 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
         <Link to={`/product-details/${id}`}>
           <div
             className={
-              grid ? "h-auto" : "w-auto md:w-[300px]  h-full border-r-2 p-4"
+              grid
+                ? "h-auto"
+                : " w-[150px] sm:w-[200px] md:w-[300px]  h-full border-r-2 p-4"
             }
           >
             <img
-              className="h-[130px] min-w-[120px] md:h-[200px] w-auto"
+              className=" xxs:h-[130px] h-[130px] min-w-[120px] md:h-[200px] w-auto"
               src={imageURL}
               alt={name}
             />
@@ -36,9 +38,10 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
         <div className={grid ? "w-full" : "flex flex-col justify-between"}>
           <div className={grid ? "my-4" : "pl-2"}>
             <p className="text-lg md:text-2xl text-orange-500 font-bold">{`$${price}`}</p>
-            <p className="text-[15px] md:text-[16px] lg:text-[19px] xl:text-3xl font-semibold">
+            <p className="xxs:text-[12px] text-[15px] md:text-[16px] lg:text-[19px] xl:text-3xl font-semibold">
               {shortenText(name, 18)}
             </p>
+
             {!grid && (
               <p className="text-[10px] md:text-xl">{shortenText(desc, 200)}</p>
             )}
