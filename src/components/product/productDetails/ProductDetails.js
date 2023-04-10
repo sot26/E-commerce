@@ -51,7 +51,7 @@ const ProductDetails = () => {
           <img
             src={product.imageURL}
             alt={product.name}
-            className="border-2 max-h-[500px] w-auto"
+            className="border-2 min-h-[400px] max-h-[500px] w-auto"
           />
           <div className="px-3">
             <p className="md:text-4xl text-2xl font-semibold">{product.name}</p>
