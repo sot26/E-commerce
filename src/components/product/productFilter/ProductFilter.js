@@ -1,6 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProduct } from "../../../redux/slice/productSlice";
 
 const ProductFilter = () => {
+  const products = useSelector(selectProduct);
+
+  const allCategories = [new Set(products.map((product) => product.category))];
+
+  console.log(allCategories);
   return (
     <div className="w-full px-8">
       <p className="text-3xl font-medium w-full ">Categories</p>

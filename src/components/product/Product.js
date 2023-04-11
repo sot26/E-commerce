@@ -5,7 +5,7 @@ import { selectProduct, STORE_PRODUCTS } from "../../redux/slice/productSlice";
 import ProductFilter from "./productFilter/ProductFilter";
 import ProductList from "./productList/ProductList";
 import spinnerImg from "../../assets/spinner.jpg";
-import { Circles, ColorRing } from "react-loader-spinner";
+import { Circles, ColorRing, RotatingLines } from "react-loader-spinner";
 
 const Product = () => {
   const { data, isLoading } = useFetchCollection("products");
@@ -28,17 +28,18 @@ const Product = () => {
         <div className="hidden md:flex md:w-[15%]">
           {isLoading ? null : <ProductFilter />}
         </div>
-        <div className="w-full min-h-[100vh] mx-2  md:w-[85%] md:mx-9">
+        <div className="w-full h-full min-h-[100vh] mx-2  md:w-[85%] md:mx-9">
           {isLoading ? (
-            <Circles
-              height="80"
-              width="80"
-              color="#ffa500"
-              ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
+            <div className="w-full min-h-[100vh] flex justify-center items-center  md:ml-[-250px]">
+              <RotatingLines
+                strokeColor="orange"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="150"
+                visible={true}
+                className="flex justify-center items-center"
+              />
+            </div>
           ) : (
             <ProductList products={products} />
           )}
