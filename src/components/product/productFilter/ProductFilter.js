@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProduct } from "../../../redux/slice/productSlice";
 
 const ProductFilter = () => {
+  const [category, setCategory] = useState("All");
   const products = useSelector(selectProduct);
 
-  const allCategories = [new Set(products.map((product) => product.category))];
+  const allCategories = [
+    "All",
+    ...new Set(products.map((product) => product.category)),
+  ];
 
   console.log(allCategories);
   return (

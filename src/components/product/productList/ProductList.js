@@ -15,7 +15,6 @@ const ProductList = ({ products }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const filteredProducts = useSelector(selectFilteredProducts);
-  console.log(filteredProducts);
 
   const dispatch = useDispatch();
 
