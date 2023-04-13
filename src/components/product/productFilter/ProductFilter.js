@@ -1,22 +1,44 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProduct } from "../../../redux/slice/productSlice";
+import { SORT_BY_CATEGORY } from "../../../redux/slice/filterSlice";
 
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
   const products = useSelector(selectProduct);
+  const dispatch = useDispatch();
 
   const allCategories = [
     "All",
     ...new Set(products.map((product) => product.category)),
   ];
 
-  console.log(allCategories);
+  const filterProducts = (cat) => {
+    setCategory(cat);
+    dispatch(SORT_BY_CATEGORY({ products: products, category: cat }));
+  };
+
   return (
     <div className="w-full px-8">
       <p className="text-3xl font-medium w-full ">Categories</p>
-      <div className="py-2 border-b-2 border-black w-full">
-        <button className="text-[16px]">All</button>
+      <div className="py-2 w-full flex items-start flex-col my-2">
+        {allCategories.map((cat, index) => {
+          return (
+            <div className="w-full" key={index}>
+              <button
+                key={index}
+                type="button"
+                className={
+                  category === cat ? "border-l-2 border-orange-500" : null
+                }
+                onClick={() => filterProducts(cat)}
+              >
+                &#8250; {cat}
+              </button>
+              <hr className="border-gray-400" />
+            </div>
+          );
+        })}
       </div>
       <div className="py-2">
         <p className="text-3xl font-medium">Brand</p>
