@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProduct } from "../../../redux/slice/productSlice";
-import { SORT_BY_CATEGORY } from "../../../redux/slice/filterSlice";
+import {
+  SORT_BY_BRANDS,
+  SORT_BY_CATEGORY,
+} from "../../../redux/slice/filterSlice";
 
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
+  const [brand, setBrand] = useState("All");
   const products = useSelector(selectProduct);
   const dispatch = useDispatch();
 
@@ -12,6 +16,15 @@ const ProductFilter = () => {
     "All",
     ...new Set(products.map((product) => product.category)),
   ];
+  const allBrands = [
+    "All",
+    ...new Set(products.map((product) => product.brand)),
+  ];
+  console.log(allBrands);
+
+  useEffect(() => {
+    dispatch(SORT_BY_BRANDS({ products, brand }));
+  }, [dispatch, brand, products]);
 
   const filterProducts = (cat) => {
     setCategory(cat);
@@ -24,7 +37,7 @@ const ProductFilter = () => {
       <div className="py-2 w-full flex items-start flex-col my-2">
         {allCategories.map((cat, index) => {
           return (
-            <div className="w-full" key={index}>
+            <div className="w-full text-xl" key={index}>
               <button
                 key={index}
                 type="button"
@@ -43,10 +56,17 @@ const ProductFilter = () => {
       <div className="py-2">
         <p className="text-3xl font-medium">Brand</p>
         <select
-          name="brand"
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
           className="my-3 border-2 border-black w-full p-2 rounded-lg"
         >
-          <option value="all">All</option>
+          {allBrands.map((brand, index) => {
+            return (
+              <option value={brand} key={index}>
+                {brand}
+              </option>
+            );
+          })}
         </select>
       </div>
       <div className="pb-2">

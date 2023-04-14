@@ -52,7 +52,10 @@ const AddProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    setProduct({
+      ...product,
+      [name]: value.charAt(0).toUpperCase() + value.slice(1),
+    });
     console.log(handleImageChange);
   };
   const handleImageChange = (e) => {

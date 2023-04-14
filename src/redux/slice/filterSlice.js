@@ -52,7 +52,7 @@ const filterSlice = createSlice({
         });
       }
 
-      state.fiteredProducts = tempProducts;
+      state.filteredProducts = tempProducts;
     },
     SORT_BY_CATEGORY(state, action) {
       const { products, category } = action.payload;
@@ -66,11 +66,25 @@ const filterSlice = createSlice({
       }
       state.filteredProducts = tempProduct;
     },
+    SORT_BY_BRANDS(state, action) {
+      const { products, brand } = action.payload;
+      let tempProduct = [];
+      if (brand === "All") {
+        tempProduct = products;
+      } else {
+        tempProduct = products.filter((product) => product.brand === brand);
+      }
+      state.filteredProducts = tempProduct;
+    },
   },
 });
 
-export const { FILTER_BY_SEARCH, SORT_PRODUCTS, SORT_BY_CATEGORY } =
-  filterSlice.actions;
+export const {
+  FILTER_BY_SEARCH,
+  SORT_PRODUCTS,
+  SORT_BY_CATEGORY,
+  SORT_BY_BRANDS,
+} = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
