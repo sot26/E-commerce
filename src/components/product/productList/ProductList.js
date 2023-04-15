@@ -31,15 +31,21 @@ const ProductList = ({ products }) => {
       <div className="w-full h-auto pb-2 mb-2 lg:flex justify-between items-center text-xl shadow-lg text-center">
         <div className="flex my-[10px] lg:my-0">
           <BsFillGridFill
-            className="mr-2 cursor-pointer"
+            className={
+              grid
+                ? "mr-2 p-[3px]  cursor-pointer bg-blue-700 text-white"
+                : "mr-2 cursor-pointer text-orange-500"
+            }
             size={22}
-            color="orangered"
             onClick={() => setGrid(true)}
           />
           <FaListAlt
-            className="cursor-pointer"
-            size={24}
-            color="blue"
+            className={
+              !grid
+                ? " p-[3px]  cursor-pointer bg-blue-700 text-white"
+                : " cursor-pointer text-orange-500"
+            }
+            size={22}
             onClick={() => setGrid(false)}
           />
           <p className=" px-3">
