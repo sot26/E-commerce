@@ -14,6 +14,7 @@ const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+
   const filteredProducts = useSelector(selectFilteredProducts);
 
   const dispatch = useDispatch();
