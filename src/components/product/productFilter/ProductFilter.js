@@ -44,6 +44,11 @@ const ProductFilter = () => {
     dispatch(SORT_BY_CATEGORY({ products: products, category: cat }));
   };
 
+  const clearFilters = () => {
+    setCategory("All");
+    setBrand("All");
+    setPrice(3000);
+  };
   return (
     <div className="w-full px-8">
       <p className="text-3xl font-medium w-full ">Categories</p>
@@ -55,7 +60,7 @@ const ProductFilter = () => {
                 key={index}
                 type="button"
                 className={
-                  category === cat ? "border-l-2 border-orange-500" : null
+                  category === cat ? "border-l-[3.5px] border-orange-500" : null
                 }
                 onClick={() => filterProducts(cat)}
               >
@@ -94,7 +99,10 @@ const ProductFilter = () => {
         />
       </div>
       <div>
-        <button className="w-[100px] text-white bg-orange-500 rounded-lg border-2 text-xl p-2 hover:translate-y-1 hover:duration-200">
+        <button
+          onClick={clearFilters}
+          className="w-[100px] text-white bg-orange-500 rounded-lg border-2 text-xl p-2 hover:translate-y-1 hover:duration-200"
+        >
           Clear Filter
         </button>
       </div>
