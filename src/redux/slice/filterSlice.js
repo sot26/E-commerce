@@ -76,6 +76,12 @@ const filterSlice = createSlice({
       }
       state.filteredProducts = tempProduct;
     },
+    FILTER_BY_PRICE(state, action) {
+      const { products, price } = action.payload;
+      let tempProduct = [];
+      tempProduct = products.filter((product) => product.price <= price);
+      state.filteredProducts = tempProduct;
+    },
   },
 });
 
@@ -84,6 +90,7 @@ export const {
   SORT_PRODUCTS,
   SORT_BY_CATEGORY,
   SORT_BY_BRANDS,
+  FILTER_BY_PRICE,
 } = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;

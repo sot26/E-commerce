@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct } from "../../../redux/slice/productSlice";
 import {
+  selectMaxPrice,
+  selectMinPrice,
+  selectProduct,
+} from "../../../redux/slice/productSlice";
+import {
+  FILTER_BY_PRICE,
   SORT_BY_BRANDS,
   SORT_BY_CATEGORY,
 } from "../../../redux/slice/filterSlice";
@@ -9,8 +14,12 @@ import {
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
   const [brand, setBrand] = useState("All");
+  const [price, setPrice] = useState(3000);
   const products = useSelector(selectProduct);
   const dispatch = useDispatch();
+
+  const minPrice = useSelector(selectMinPrice);
+  const maxPrice = useSelector(selectMaxPrice);
 
   const allCategories = [
     "All",
@@ -25,6 +34,10 @@ const ProductFilter = () => {
   useEffect(() => {
     dispatch(SORT_BY_BRANDS({ products, brand }));
   }, [dispatch, brand, products]);
+
+  useEffect(() => {
+    dispatch(FILTER_BY_PRICE({ products, price }));
+  }, [dispatch, price, products]);
 
   const filterProducts = (cat) => {
     setCategory(cat);
@@ -71,8 +84,14 @@ const ProductFilter = () => {
       </div>
       <div className="pb-2">
         <p className="text-3xl font-medium">Price</p>
-        <p className="text-xl font-medium py-2">$1500</p>
-        <input type="range" name="price" min="100" max="1000" />
+        <p className="text-xl font-medium py-2">{`$${price}`}</p>
+        <input
+          type="range"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          min={minPrice}
+          max={maxPrice}
+        />
       </div>
       <div>
         <button className="w-[100px] text-white bg-orange-500 rounded-lg border-2 text-xl p-2 hover:translate-y-1 hover:duration-200">

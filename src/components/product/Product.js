@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetchCollection from "../../customHooks/useFetchCollection";
-import { selectProduct, STORE_PRODUCTS } from "../../redux/slice/productSlice";
+import {
+  GET_PRICE_RANGE,
+  selectProduct,
+  STORE_PRODUCTS,
+} from "../../redux/slice/productSlice";
 import ProductFilter from "./productFilter/ProductFilter";
 import ProductList from "./productList/ProductList";
 import spinnerImg from "../../assets/spinner.jpg";
-import { Circles, ColorRing, RotatingLines } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 
 const Product = () => {
   const { data, isLoading } = useFetchCollection("products");
@@ -17,6 +21,11 @@ const Product = () => {
   useEffect(() => {
     dispatch(
       STORE_PRODUCTS({
+        products: data,
+      })
+    );
+    dispatch(
+      GET_PRICE_RANGE({
         products: data,
       })
     );
