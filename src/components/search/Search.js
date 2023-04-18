@@ -7,10 +7,10 @@ const Search = ({ value, onChange }) => {
       <BiSearch className="md:w-[25px] ml-[-10px] md:ml-0" />
       <input
         type="text"
-        placeholder="Search by Name"
+        placeholder="Search by products, brand and category"
         value={value}
         onChange={onChange}
-        className="top-0 px-2"
+        className="top-0 px-2 "
       />
     </div>
   );
