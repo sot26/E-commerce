@@ -55,7 +55,7 @@ const ProductFilter = () => {
     setPrice(3000);
   };
   return (
-    <div className="w-full ">
+    <div className="w-full bg-white">
       <div className="w-full">
         <p className="text-3xl font-medium w-full ">Categories</p>
         <div className="py-2 w-full flex items-start flex-col my-2">

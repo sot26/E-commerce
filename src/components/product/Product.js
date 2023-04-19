@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import {
@@ -8,11 +8,12 @@ import {
 } from "../../redux/slice/productSlice";
 import ProductFilter from "./productFilter/ProductFilter";
 import ProductList from "./productList/ProductList";
-import spinnerImg from "../../assets/spinner.jpg";
 import { RotatingLines } from "react-loader-spinner";
+import { FaCogs } from "react-icons/fa";
 
 const Product = () => {
   const { data, isLoading } = useFetchCollection("products");
+  const [showFilter, setShowFilter] = useState(false);
   const products = useSelector(selectProduct);
   // console.log(products);
 
@@ -31,10 +32,19 @@ const Product = () => {
     );
   }, [dispatch, data]);
 
+  const toggleFilter = () => {
+    setShowFilter(!showFilter);
+  };
   return (
     <div className="h-full w-full lg:px-[50px] pt-6">
-      <div className="w-full flex">
-        <div className="hidden md:flex md:w-[15%]">
+      <div className="w-full flex relative">
+        <div
+          className={
+            showFilter
+              ? "absolute w-[50%] h-[60vh] px-2 shadow-xl  flex md:w-[15%]"
+              : "hidden md:flex md:w-[15%]"
+          }
+        >
           {isLoading ? null : <ProductFilter />}
         </div>
         <div className="w-full h-full min-h-[100vh] mx-2  md:w-[85%] md:mx-9">
@@ -52,6 +62,16 @@ const Product = () => {
           ) : (
             <ProductList products={products} />
           )}
+
+          <div
+            className="absolute top-8 cursor-pointer right-4 md:hidden flex"
+            onClick={toggleFilter}
+          >
+            <FaCogs size={20} color="orangered" />
+            <p>
+              <b>{showFilter ? "Hide Filter" : "Show Filter"}</b>
+            </p>
+          </div>
         </div>
       </div>
     </div>
