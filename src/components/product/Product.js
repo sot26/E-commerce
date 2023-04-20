@@ -36,7 +36,7 @@ const Product = () => {
     setShowFilter(!showFilter);
   };
   return (
-    <div className="h-full w-full lg:px-[50px] pt-6">
+    <div className="h-full w-full md:px-[15px] lg:px-[50px] pt-6">
       <div className="w-full flex relative">
         <div
           className={
