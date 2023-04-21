@@ -15,7 +15,6 @@ const Product = () => {
   const { data, isLoading } = useFetchCollection("products");
   const [showFilter, setShowFilter] = useState(false);
   const products = useSelector(selectProduct);
-  // console.log(products);
 
   const dispatch = useDispatch();
 
@@ -35,6 +34,7 @@ const Product = () => {
   const toggleFilter = () => {
     setShowFilter(!showFilter);
   };
+
   return (
     <div className="h-full w-full md:px-[15px] lg:px-[50px] pt-6">
       <div className="w-full flex relative">
