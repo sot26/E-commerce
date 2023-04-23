@@ -9,13 +9,25 @@ import {
   SORT_PRODUCTS,
   selectFilteredProducts,
 } from "../../../redux/slice/filterSlice";
+import Pagination from "../../pagination/Pagination";
 
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-
   const filteredProducts = useSelector(selectFilteredProducts);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(1);
+
+  //get current product
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const dispatch = useDispatch();
 
@@ -90,6 +102,12 @@ const ProductList = ({ products }) => {
           </>
         )}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        productsPerPage={productsPerPage}
+        totalProducts={filteredProducts.lenght}
+      />
     </div>
   );
 };
