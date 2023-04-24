@@ -19,7 +19,7 @@ const ProductList = ({ products }) => {
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(2);
 
   //get current product
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -92,7 +92,7 @@ const ProductList = ({ products }) => {
           <p>No Product found</p>
         ) : (
           <>
-            {filteredProducts.map((product) => {
+            {currentProducts.map((product) => {
               return (
                 <div key={product.id}>
                   <ProductItem {...product} product={product} grid={grid} />
