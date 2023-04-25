@@ -14,7 +14,13 @@ const Pagination = ({
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
-  return <div>pagination</div>;
+  return (
+    <ul>
+      <li>Previous page</li>
+      <li></li>
+      <li>Next page</li>
+    </ul>
+  );
 };
 
 export default Pagination;
