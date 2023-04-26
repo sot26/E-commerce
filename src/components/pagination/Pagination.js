@@ -17,7 +17,7 @@ const Pagination = ({
   return (
     <ul>
       <li>Previous page</li>
-      <li></li>
+      <li>{pageNumber}</li>
       <li>Next page</li>
     </ul>
   );
