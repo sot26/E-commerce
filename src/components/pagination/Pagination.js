@@ -15,11 +15,11 @@ const Pagination = ({
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   return (
-    <ul>
+    <div>
       <li>Previous page</li>
       <li>{pageNumber}</li>
       <li>Next page</li>
-    </ul>
+    </div>
   );
 };
 
