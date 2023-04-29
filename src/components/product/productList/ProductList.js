@@ -16,6 +16,7 @@ const ProductList = ({ products }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const filteredProducts = useSelector(selectFilteredProducts);
+  console.log(filteredProducts.lenght);
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,7 +107,7 @@ const ProductList = ({ products }) => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         productsPerPage={productsPerPage}
-        totalProducts={filteredProducts.lenght}
+        totalProducts={filteredProducts}
       />
     </div>
   );
