@@ -43,7 +43,7 @@ const Pagination = ({
   for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log(pageNumbers);
+  console.log(number);
 
   return (
     <div className="flex w-full justify-center items-center">
