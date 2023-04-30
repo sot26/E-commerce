@@ -107,7 +107,7 @@ const ProductList = ({ products }) => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         productsPerPage={productsPerPage}
-        totalProducts={filteredProducts}
+        totalProducts={filteredProducts.lenght}
       />
     </div>
   );

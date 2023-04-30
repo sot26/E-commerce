@@ -7,7 +7,7 @@ const Pagination = ({
   totalProducts,
 }) => {
   const pageNumbers = [];
-  const totalPages = totalProducts.length / productsPerPage;
+  const totalPages = totalProducts / productsPerPage;
 
   const [pageNumberLimit] = useState(5);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
@@ -40,10 +40,10 @@ const Pagination = ({
     }
   };
 
-  for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log(number);
+  console.log(pageNumbers);
 
   return (
     <div className="flex w-full justify-center items-center">
