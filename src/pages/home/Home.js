@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mb-6">
       <Slider />
       <Product />
     </div>
