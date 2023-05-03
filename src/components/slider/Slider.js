@@ -64,7 +64,7 @@ const Slider = () => {
 
   return (
     <div className="w-full h-full">
-      <div className=" h-[80vh] w-full m-auto pb-12  relative group">
+      <div className=" h-[85vh] w-full m-auto pb-12  relative group">
         <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-0 left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
           <BsChevronCompactLeft size={30} onClick={prevSlide} />
         </div>
