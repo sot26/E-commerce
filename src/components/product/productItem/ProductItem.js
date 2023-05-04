@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
   const shortenText = (text, n) => {
     if (text.length > n) {
-      const shortenedText = text.substring(0, n).concat("...");
+      const shortenedText = text.substring(0, n).concat("....");
       return shortenedText;
     }
     return text;
