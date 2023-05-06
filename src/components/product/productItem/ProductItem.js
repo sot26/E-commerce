@@ -1,13 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { ADD_TO_CART } from "../../../redux/slice/cartSlice";
 
 const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
+  const dispatch = useDispatch();
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("....");
       return shortenedText;
     }
     return text;
+  };
+
+  const addToCart = (product) => {
+    dispatch(ADD_TO_CART(product));
   };
   return (
     <div
@@ -48,6 +55,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
           </div>
           <div className="w-full text-white text-[12px] md:text-2xl ">
             <button
+              onClick={() => addToCart(product)}
               className={
                 grid
                   ? "w-full bg-orange-500 h-[29px] md:h-[35px] rounded-lg md:rounded-xl hover:translate-y-1 hover:duration-200"
