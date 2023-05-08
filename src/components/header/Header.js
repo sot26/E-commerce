@@ -112,10 +112,14 @@ const Header = () => {
                 </NavLink>
               </ShowOnLogin>
             </span>
-            <span className="flex items-center px-2 relative hover:text-orange-600 ">
-              <FaShoppingCart />
-              <p className="absolute top-[-15px] right-[-5px] text-[18px]">1</p>
-            </span>
+            <NavLink to="/cart">
+              <span className="flex items-center px-2 relative hover:text-orange-600 ">
+                <FaShoppingCart />
+                <p className="absolute top-[-15px] right-[-5px] text-[18px]">
+                  1
+                </p>
+              </span>
+            </NavLink>
           </div>
 
           {/* mobile menu */}
