@@ -13,6 +13,8 @@ const Cart = () => {
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
 
+  console.log(cartTotalQuantity);
+
   // const clearCart = () => {
   //   cartItems(localStorage.clear());
   //   cartTotalAmount(0);
@@ -82,9 +84,33 @@ const Cart = () => {
           </table>
         )}
 
-        <button className="p-3 text-white text-lg md:text-xl bg-orange-400 rounded-lg">
-          Clear cart
-        </button>
+        <div className="w-full relative">
+          <div className="w-full flex justify-between">
+            <button className="py-3 px-5 text-white text-lg md:text-xl bg-orange-600 rounded-lg">
+              Clear cart
+            </button>
+            <div className="text-2xl font-medium">
+              <Link to="/#products">&larr; Continue shopping</Link>
+            </div>
+          </div>
+          <div className="flex flex-row-reverse ">
+            <div className="w-full max-w-[300px] p-4 shadow-2xl rounded-2xl">
+              <p className="text-xl">{`Cart item(s): ${cartTotalQuantity.length}`}</p>
+              <div className="flex justify-between my-2">
+                <p className="text-3xl font-semibold">Subtotal</p>
+                <p className="text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
+                  2
+                )}`}</p>
+              </div>
+              <p className="text-lg mb-2">
+                Taxes and shipping calculated at checkout
+              </p>
+              <button className="p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full">
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
