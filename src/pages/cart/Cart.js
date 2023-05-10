@@ -50,7 +50,7 @@ const Cart = () => {
                 const { id, name, price, imageURL, cartQuantity } = cart;
                 return (
                   <tr key={id} className="text-[12px] md:text-3xl border-b-2">
-                    <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
+                    <td className="border-x-2 text-[12px] md:text-2xl font-semibold">
                       {index + 1}
                     </td>
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
