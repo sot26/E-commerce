@@ -125,12 +125,14 @@ const Header = () => {
           {/* mobile menu */}
           {!nav ? (
             <div className="flex lg:hidden">
-              <span className="flex items-center pr-4 relative hover:text-orange-600 ">
-                <FaShoppingCart size={20} />
-                <p className="absolute top-[-15px] right-[5px] text-[18px]">
-                  1
-                </p>
-              </span>
+              <NavLink to="/cart">
+                <span className="flex items-center pr-4 relative hover:text-orange-600 ">
+                  <FaShoppingCart size={20} />
+                  <p className="absolute top-[-15px] right-[5px] text-[18px]">
+                    1
+                  </p>
+                </span>
+              </NavLink>
               <div className=" px-2">
                 <FaBars
                   size={20}
