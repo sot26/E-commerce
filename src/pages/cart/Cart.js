@@ -1,6 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  ADD_TO_CART,
+  DECREASE_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
@@ -12,8 +14,14 @@ const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+  const dispatch = useDispatch();
 
-  console.log(cartTotalQuantity);
+  const increaseCart = (cart) => {
+    dispatch(ADD_TO_CART(cart));
+  };
+  const decreaseCart = (cart) => {
+    dispatch(DECREASE_CART(cart));
+  };
 
   // const clearCart = () => {
   //   cartItems(localStorage.clear());
@@ -21,7 +29,7 @@ const Cart = () => {
   //   cartTotalQuantity(0);
   // };
   return (
-    <div className="w-full">
+    <div className="w-full min-h-[100vh]">
       <div className="w-full px-2 md:px-12">
         <p className="text-3xl md:text-6xl py-6 font-semibold">Shopping Cart</p>
         {cartItems.length === 0 ? (
@@ -49,7 +57,10 @@ const Cart = () => {
               {cartItems.map((cart, index) => {
                 const { id, name, price, imageURL, cartQuantity } = cart;
                 return (
-                  <tr key={id} className="text-[12px] md:text-3xl border-b-2">
+                  <tr
+                    key={id}
+                    className="text-[12px] md:text-3xl border-b-2 h-full"
+                  >
                     <td className="border-x-2 text-[12px] md:text-2xl font-semibold">
                       {index + 1}
                     </td>
@@ -58,19 +69,29 @@ const Cart = () => {
                       <img
                         className="w-[80px] md:w-[180px] ml-2 md:ml-4"
                         src={imageURL}
-                        alt="product image"
+                        alt="product "
                       />
                     </td>
-                    <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
+                    <td className="border-r-2 text-[12px] md:text-2xl font-semibold  h-full">
                       ${price}
                     </td>
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold ">
                       <div className="flex items-center text-xl mx-[3px]">
-                        <button className="p-1 bg-gray-200">-</button>
+                        <button
+                          className="p-1 bg-gray-200"
+                          onClick={() => decreaseCart(cart)}
+                        >
+                          -
+                        </button>
                         <p className="mx-1 font-semibold text-[12px] md:text-2xl">
                           {cartQuantity}
                         </p>
-                        <button className="p-1 bg-gray-200">+</button>
+                        <button
+                          className="p-1 bg-gray-200"
+                          onClick={() => increaseCart(cart)}
+                        >
+                          +
+                        </button>
                       </div>
                     </td>
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
@@ -95,7 +116,7 @@ const Cart = () => {
               <Link to="/#products">&larr; Continue shopping</Link>
             </div>
           </div>
-          <div className="flex md:flex-row-reverse ">
+          <div className="flex md:flex-row-reverse mt-3 ">
             <div className="w-full max-w-[300px] p-4 shadow-2xl rounded-2xl">
               <p className="text-xl">{`Cart item(s): ${cartTotalQuantity.length}`}</p>
               <div className="flex justify-between my-2">
