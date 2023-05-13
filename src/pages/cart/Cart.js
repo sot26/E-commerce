@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
   DECREASE_CART,
+  REMOVE_FROM_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "../../redux/slice/cartSlice";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
@@ -23,6 +25,9 @@ const Cart = () => {
     dispatch(DECREASE_CART(cart));
   };
 
+  const removeFromCart = (cart) => {
+dispatch(REMOVE_FROM_CART(cart))
+  }
   // const clearCart = () => {
   //   cartItems(localStorage.clear());
   //   cartTotalAmount(0);
@@ -98,7 +103,7 @@ const Cart = () => {
                       ${(price * cartQuantity).toFixed(2)}
                     </td>
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
-                      <FaTrashAlt size={19} color="orangered" />
+                      <FaTrashAlt onClick={() => removeFromCart(cart)} size={19} color="orangered" className="cursor-pointer" />
                     </td>
                   </tr>
                 );
