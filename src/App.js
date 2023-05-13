@@ -7,7 +7,7 @@ import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
 import Contact from "./pages/contact/Contact";
 import Home from "./pages/home/Home";
-import OrderHistory from "./pages/orderHistory/OrderHistory";
+// import OrderHistory from "./pages/orderHistory/OrderHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./pages/admin/Admin";
@@ -26,7 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/order" element={<OrderHistory />} />
+          {/* <Route path="/order" element={<OrderHistory />} /> */}
           <Route path="/reset" element={<Reset />} />
           <Route path="/product-details/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
