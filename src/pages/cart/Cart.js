@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
+  CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
   selectCartItems,
@@ -28,11 +29,9 @@ const Cart = () => {
   const removeFromCart = (cart) => {
 dispatch(REMOVE_FROM_CART(cart))
   }
-  // const clearCart = () => {
-  //   cartItems(localStorage.clear());
-  //   cartTotalAmount(0);
-  //   cartTotalQuantity(0);
-  // };
+  const clearCart = () => {
+    dispatch(CLEAR_CART())
+  };
   return (
     <div className="w-full min-h-[100vh]">
       <div className="w-full px-2 md:px-12">
@@ -114,7 +113,7 @@ dispatch(REMOVE_FROM_CART(cart))
 
         <div className="w-full relative">
           <div className="w-full flex justify-between mt-2">
-            <button className="py-[5px]  px-[7px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-orange-600 rounded-lg">
+            <button onClick={clearCart} className="py-[5px]  px-[7px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-orange-600 rounded-lg">
               Clear cart
             </button>
             <div className="text-xl md:text-2xl font-medium">

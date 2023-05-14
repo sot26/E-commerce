@@ -58,7 +58,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
               onClick={() => addToCart(product)}
               className={
                 grid
-                  ? "w-full bg-orange-500 h-[29px] md:h-[35px] rounded-lg md:rounded-xl hover:translate-y-1 hover:duration-200"
+                  ? "w-full bg-orange-500 h-[29px] md:h-[45px] rounded-lg md:rounded-xl hover:translate-y-1 hover:duration-200"
                   : "w-[100px] md:w-[180px] bg-orange-500 rounded-lg md:rounded-xl h-[29px] md:h-[35px] mb-2 ml-2 hover:translate-y-1 hover:duration-200"
               }
             >
