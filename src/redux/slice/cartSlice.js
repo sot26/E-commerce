@@ -72,11 +72,36 @@ const cartSlice = createSlice({
         position: "top-left",
       });
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    CALCULATE_SUBTOTAL(state, action){
+      const array =[]
+      state.cartItems.map((item) => {
+        const {price, cartQuantity} = item
+        const cartItemAmount = price * cartQuantity
+        return array.push(cartItemAmount)
+      })
+      const totalAmount = array.reduce((a, b) => {
+        return a + b
+      }, 0)
+      state.cartTotalAmount = totalAmount
+    },
+    CART_TOTAL_QUANTITY(state, action){
+      const array =[]
+      state.cartItems.map((item) => {
+        const {cartQuantity} = item;
+        const quantity = cartQuantity;
+        return array.push(quantity)
+      })
+      const totalQuantity = array.reduce((a, b) => {
+        return a + b
+      }, 0)
+      state.cartTotalQuantity = totalQuantity
+      console.log(state.cartTotalQuantity)
     }
   },
 });
 
-export const { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART, CLEAR_CART } = cartSlice.actions;
+export const { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART, CLEAR_CART, CALCULATE_SUBTOTAL, CART_TOTAL_QUANTITY } = cartSlice.actions;
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;
 export const selectCartTotalAmount = (state) => state.cart.cartTotalAmount;

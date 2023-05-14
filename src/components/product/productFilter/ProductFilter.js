@@ -109,7 +109,7 @@ const ProductFilter = () => {
         <div>
           <button
             onClick={clearFilters}
-            className="w-[100px] text-white bg-orange-500 rounded-lg border-2 text-xl p-2 hover:translate-y-1 hover:duration-200"
+            className="w-[100px] md:w-[120px] text-white bg-orange-500 rounded-lg border-2 text-xl p-2 hover:translate-y-1 hover:duration-200"
           >
             Clear Filter
           </button>
