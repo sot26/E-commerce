@@ -66,7 +66,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-[60px] sm:h-[80px] bg-black text-white">
+      <div className="h-[60px] sm:h-[80px] bg-black text-white sticky">
         <div className="flex justify-between px-6 sm:px-20 items-center h-full ">
           <div className="cursor-pointer">
             <Link to="/">

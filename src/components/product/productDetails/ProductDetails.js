@@ -4,10 +4,24 @@ import { Link, useParams } from "react-router-dom";
 import { db } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import { Circles } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ADD_TO_CART,
+  CART_TOTAL_QUANTITY,
+  DECREASE_CART,
+  selectCartItems,
+} from "../../../redux/slice/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
+  const cart = cartItems.find((cart) => cart.id === id);
+  const isCartAdded = cartItems.findIndex((cart) => {
+    return cart.id === id;
+  });
 
   const getProduct = async () => {
     const docRef = doc(db, "products", id);
@@ -28,8 +42,18 @@ const ProductDetails = () => {
     getProduct();
   }, []);
 
+  const addToCart = (product) => {
+    dispatch(ADD_TO_CART(product));
+    dispatch(CART_TOTAL_QUANTITY());
+  };
+
+  const decreaseCart = (product) => {
+    dispatch(DECREASE_CART(product));
+    dispatch(CART_TOTAL_QUANTITY());
+  };
+
   return (
-    <div className="w-ful h-full mx-1 mb-4 md:mx-24 min-h-[80vh]">
+    <div className="w-ful h-full mx-1 mb-4 md:mx-24 min-h-[90vh]">
       <div>
         <p className="text-4xl md:text-6xl mt-3 ">Product Details</p>
         <Link to="/#products">
@@ -67,12 +91,27 @@ const ProductDetails = () => {
             <p className="md:mt-4 mt-2 text-[13px] md:text-2xl ">
               <b>Brand:</b> {product.brand}
             </p>
-            <div className="flex items-center text-xl ">
-              <button className="p-1 bg-gray-200">-</button>
-              <p className="mx-1 font-semibold ">1</p>
-              <button className="p-1 bg-gray-200">+</button>
-            </div>
-            <button className="md:mt-4 mt-2 md:py-2 px-4 h-[25px] md:h-[35px] md:text-xl text-white bg-orange-500 rounded-lg md:rounded-xl">
+            {isCartAdded < 0 ? null : (
+              <div className="flex items-center text-xl ">
+                <button
+                  onClick={() => decreaseCart(product)}
+                  className="p-1 bg-gray-200"
+                >
+                  -
+                </button>
+                <p className="mx-1 font-semibold ">{cart.cartQuantity}</p>
+                <button
+                  onClick={() => addToCart(product)}
+                  className="p-1 bg-gray-200"
+                >
+                  +
+                </button>
+              </div>
+            )}
+            <button
+              onClick={() => addToCart(product)}
+              className="md:mt-4 mt-2 md:py-2 px-4 h-[25px] md:h-[45px] md:text-xl text-white bg-orange-500 rounded-lg md:rounded-xl"
+            >
               ADD TO CART
             </button>
           </div>
