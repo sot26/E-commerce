@@ -16,6 +16,7 @@ import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
 const Header = () => {
   const [nav, setNav] = useState(false);
   const [displayName, setdisplayName] = useState("");
+  const [scrollPage, setScrollPage] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
