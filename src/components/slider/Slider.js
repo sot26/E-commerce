@@ -82,9 +82,12 @@ const Slider = () => {
                 {slides[currentSlide].desc}
               </p>
               <hr className="h-2 text-white w-full" />
-              <button className="p-2 md:p-4 bg-blue-700 rounded-lg text-xl md:text-2xl">
+              <a
+                href="#product"
+                className="p-2 md:p-4 bg-blue-700 rounded-lg text-xl md:text-2xl"
+              >
                 Shop Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
