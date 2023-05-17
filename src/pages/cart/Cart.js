@@ -14,7 +14,6 @@ import {
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 
-
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
@@ -29,17 +28,17 @@ const Cart = () => {
   };
 
   const removeFromCart = (cart) => {
-dispatch(REMOVE_FROM_CART(cart))
-  }
+    dispatch(REMOVE_FROM_CART(cart));
+  };
   const clearCart = () => {
-    dispatch(CLEAR_CART())
+    dispatch(CLEAR_CART());
   };
 
   useEffect(() => {
-    dispatch(CALCULATE_SUBTOTAL())
-    dispatch(CART_TOTAL_QUANTITY())
-  }, [dispatch, cartItems])
-  
+    dispatch(CALCULATE_SUBTOTAL());
+    dispatch(CART_TOTAL_QUANTITY());
+  }, [dispatch, cartItems]);
+
   return (
     <div className="w-full min-h-[100vh]">
       <div className="w-full px-2 md:px-12">
@@ -110,7 +109,12 @@ dispatch(REMOVE_FROM_CART(cart))
                       ${(price * cartQuantity).toFixed(2)}
                     </td>
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
-                      <FaTrashAlt onClick={() => removeFromCart(cart)} size={19} color="orangered" className="cursor-pointer" />
+                      <FaTrashAlt
+                        onClick={() => removeFromCart(cart)}
+                        size={19}
+                        color="orangered"
+                        className="cursor-pointer"
+                      />
                     </td>
                   </tr>
                 );
@@ -121,26 +125,29 @@ dispatch(REMOVE_FROM_CART(cart))
 
         <div className="w-full relative">
           <div className="w-full flex justify-between mt-2">
-            <button onClick={clearCart} className="py-[5px]  px-[7px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-orange-600 rounded-lg">
+            <button
+              onClick={clearCart}
+              className="py-[7px]  px-[12px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-orange-600 rounded-lg"
+            >
               Clear cart
             </button>
-            <div className="text-xl md:text-2xl font-medium">
+            <div className="text-lg md:text-2xl font-medium">
               <Link to="/#products">&larr; Continue shopping</Link>
             </div>
           </div>
           <div className="flex md:flex-row-reverse mt-3 ">
             <div className="w-full max-w-[300px] p-4 shadow-2xl rounded-2xl">
-              <p className="text-xl font-semibold">{`Cart item(s): ${cartTotalQuantity}`}</p>
+              <p className="text-lg md:text-xl font-semibold">{`Cart item(s): ${cartTotalQuantity}`}</p>
               <div className="flex justify-between my-2">
-                <p className="text-3xl font-semibold">Subtotal</p>
-                <p className="text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
+                <p className="text-2xl md:text-3xl font-semibold">Subtotal</p>
+                <p className="text-2xl text-orange-500 md:text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
                   2
                 )}`}</p>
               </div>
-              <p className="text-lg mb-2">
+              <p className="text-[15px] md:text-lg mb-2">
                 Taxes and shipping calculated at checkout
               </p>
-              <button className="p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full">
+              <button className="p-2 md:p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full">
                 Checkout
               </button>
             </div>

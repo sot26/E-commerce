@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { ADD_TO_CART } from "../../../redux/slice/cartSlice";
+import {
+  ADD_TO_CART,
+  CART_TOTAL_QUANTITY,
+} from "../../../redux/slice/cartSlice";
 
 const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
   const dispatch = useDispatch();
@@ -15,6 +18,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
+    dispatch(CART_TOTAL_QUANTITY());
   };
   return (
     <div

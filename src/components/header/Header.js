@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,12 +12,31 @@ import {
 } from "../../redux/slice/authSlice";
 import { AdminOnlyLink } from "../adminOnlyRoute/AdminOnlyRoute";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/hiddenLink";
+import {
+  CART_TOTAL_QUANTITY,
+  selectCartTotalQuantity,
+} from "../../redux/slice/cartSlice";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
   const [displayName, setdisplayName] = useState("");
   const [scrollPage, setScrollPage] = useState(false);
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(CART_TOTAL_QUANTITY());
+  }, []);
+
+  const fixNavbar = () => {
+    if (window.scrollY > 50) {
+      setScrollPage(true);
+    } else {
+      setScrollPage(false);
+    }
+  };
+  window.addEventListener("scroll", fixNavbar);
 
   const dispatch = useDispatch();
   function navClick() {
@@ -67,7 +86,13 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-[60px] sm:h-[80px] bg-black text-white sticky">
+      <div
+        className={
+          scrollPage
+            ? `fixed h-[60px] sm:h-[80px] bg-black text-white w-full z-10`
+            : "h-[60px] sm:h-[80px] bg-black text-white w-full z-10"
+        }
+      >
         <div className="flex justify-between px-6 sm:px-20 items-center h-full ">
           <div className="cursor-pointer">
             <Link to="/">
@@ -116,8 +141,8 @@ const Header = () => {
             <NavLink to="/cart">
               <span className="flex items-center px-2 relative hover:text-orange-600 ">
                 <FaShoppingCart />
-                <p className="absolute top-[-15px] right-[-5px] text-[18px]">
-                  1
+                <p className="absolute top-[-15px] right-[-9px] text-[18px]">
+                  {cartTotalQuantity}
                 </p>
               </span>
             </NavLink>
@@ -129,8 +154,8 @@ const Header = () => {
               <NavLink to="/cart">
                 <span className="flex items-center pr-4 relative hover:text-orange-600 ">
                   <FaShoppingCart size={20} />
-                  <p className="absolute top-[-15px] right-[5px] text-[18px]">
-                    1
+                  <p className="absolute top-[-15px] right-[1px] text-[18px]">
+                    {cartTotalQuantity}
                   </p>
                 </span>
               </NavLink>
@@ -234,7 +259,7 @@ const Header = () => {
                     >
                       <FaShoppingCart size={20} />
                       <p className="absolute top-[-15px] left-[20px] text-[15px]">
-                        1
+                        {cartTotalQuantity}
                       </p>
                     </Link>
                   </li>
