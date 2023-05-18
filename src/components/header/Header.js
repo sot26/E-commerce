@@ -30,7 +30,7 @@ const Header = () => {
   }, []);
 
   const fixNavbar = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 100) {
       setScrollPage(true);
     } else {
       setScrollPage(false);
