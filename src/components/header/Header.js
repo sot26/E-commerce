@@ -192,8 +192,17 @@ const Header = () => {
                     SOTshop
                   </Link>
                 </li>
+                <li className="">
+                  <AdminOnlyLink>
+                    <Link to="/admin/home">
+                      <button className="p-2 mx-2 bg-blue-700 rounded-lg">
+                        Admin
+                      </button>
+                    </Link>
+                  </AdminOnlyLink>
+                </li>
                 <hr />
-                <li className="py-3 text-lg">
+                <li className="py-2 px-2">
                   <Link
                     onClick={navClick}
                     to="./"
@@ -203,7 +212,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <hr />
-                <li className="py-3 text-lg">
+                <li className="py-2 px-2">
                   <Link
                     onClick={navClick}
                     to="./contact"
@@ -213,6 +222,14 @@ const Header = () => {
                   </Link>
                 </li>
                 <hr />
+                <li>
+                  <ShowOnLogin>
+                    <div className="flex text-orange-600 px-2 py-2 items-center">
+                      <FaUserCircle />
+                      <p>Hi, {displayName}</p>
+                    </div>
+                  </ShowOnLogin>
+                </li>
                 <ShowOnLogout>
                   <li className="py-3 text-lg">
                     <Link
@@ -239,7 +256,7 @@ const Header = () => {
                   <hr />
                 </ShowOnLogout>
                 <ShowOnLogin>
-                  <li className="py-3 text-lg">
+                  <li className="py-3 px-2">
                     <Link
                       onClick={navClick}
                       to="/orders"
@@ -249,9 +266,17 @@ const Header = () => {
                     </Link>
                   </li>
                 </ShowOnLogin>
+                <hr />
+                <li>
+                  <ShowOnLogin>
+                    <NavLink onClick={logoutUser}>
+                      <p className="px-2 hover:text-orange-600 py-2">Logout</p>
+                    </NavLink>
+                  </ShowOnLogin>
+                </li>
                 <ShowOnLogin>
                   <hr />
-                  <li className="py-3">
+                  <li className="py-2 mx-2">
                     <Link
                       onClick={navClick}
                       to="/cart"

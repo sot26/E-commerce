@@ -7,18 +7,23 @@ import {
   CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
+  SAVE_URL,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "../../redux/slice/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import { selectIsLoggedIn } from "../../redux/slice/authSlice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const increaseCart = (cart) => {
     dispatch(ADD_TO_CART(cart));
@@ -37,7 +42,20 @@ const Cart = () => {
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CART_TOTAL_QUANTITY());
+    dispatch(SAVE_URL(""));
   }, [dispatch, cartItems]);
+
+  const url = window.location.href;
+
+  const checkOut = () => {
+    if (isLoggedIn === true) {
+      navigate("/checkout-details");
+    } else {
+      toast.error("Login to continue");
+      dispatch(SAVE_URL(url));
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="w-full min-h-[100vh]">
@@ -147,7 +165,10 @@ const Cart = () => {
               <p className="text-[15px] md:text-lg mb-2">
                 Taxes and shipping calculated at checkout
               </p>
-              <button className="p-2 md:p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full">
+              <button
+                onClick={checkOut}
+                className="p-2 md:p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full"
+              >
                 Checkout
               </button>
             </div>

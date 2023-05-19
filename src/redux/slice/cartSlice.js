@@ -7,6 +7,7 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  previousURL: "",
 };
 
 const cartSlice = createSlice({
@@ -14,7 +15,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     ADD_TO_CART(state, action) {
-      console.log(action.payload);
       const productIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
@@ -97,7 +97,9 @@ const cartSlice = createSlice({
         return a + b;
       }, 0);
       state.cartTotalQuantity = totalQuantity;
-      console.log(state.cartTotalQuantity);
+    },
+    SAVE_URL(state, action) {
+      state.previousURL = action.payload;
     },
   },
 });
@@ -109,9 +111,11 @@ export const {
   CLEAR_CART,
   CALCULATE_SUBTOTAL,
   CART_TOTAL_QUANTITY,
+  SAVE_URL,
 } = cartSlice.actions;
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;
 export const selectCartTotalAmount = (state) => state.cart.cartTotalAmount;
+export const selectPreviosURL = (state) => state.cart.previousURL;
 
 export default cartSlice.reducer;
