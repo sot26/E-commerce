@@ -11,11 +11,23 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
+import { selectPreviosURL } from "../../redux/slice/cartSlice";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const previousURL = useSelector(selectPreviosURL);
+
+  const redirectUser = () => {
+    if (previousURL.includes("cart")) {
+      navigate("/cart");
+    } else {
+      navigate("/");
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,8 +35,8 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/");
         toast.success("Login Successful");
+        redirectUser();
       })
       .catch((error) => {
         toast.error(error.message);
@@ -37,8 +49,8 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        navigate("/");
         toast.success("Logged In Successfully");
+        redirectUser();
       })
       .catch((error) => {
         toast.error(error.message);
