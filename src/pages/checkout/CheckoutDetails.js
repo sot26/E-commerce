@@ -3,10 +3,11 @@ import {
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "../../redux/slice/cartSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../redux/slice/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CountryDropdown } from "react-country-region-selector";
+import { SAVE_BILLING_ADDRESS } from "../../redux/slice/checkoutSlice";
 
 const initialAddressState = {
   name: "",
@@ -30,6 +31,8 @@ const CheckoutDetails = () => {
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
   const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleShipping = (e) => {
     const { name, value } = e.target;
@@ -47,8 +50,9 @@ const CheckoutDetails = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(shippingAddress);
-    console.log(billingAddress);
+    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    dispatch(SAVE_BILLING_ADDRESS(shippingAddress));
+    navigate("/checkout");
   };
   return (
     <div className="w-full">
@@ -92,7 +96,6 @@ const CheckoutDetails = () => {
                     value={shippingAddress.line2}
                     name="line2"
                     onChange={(e) => handleShipping(e)}
-                    required
                   />
                 </div>
                 <div>
@@ -128,7 +131,6 @@ const CheckoutDetails = () => {
                     value={shippingAddress.postal_code}
                     name="postal_code"
                     onChange={(e) => handleShipping(e.target.value)}
-                    required
                   />
                 </div>
                 <div>
@@ -199,7 +201,6 @@ const CheckoutDetails = () => {
                     value={billingAddress.line2}
                     name="line2"
                     onChange={(e) => handleBilling(e)}
-                    required
                   />
                 </div>
                 <div>
@@ -235,7 +236,6 @@ const CheckoutDetails = () => {
                     value={billingAddress.postal_code}
                     name="postal_code"
                     onChange={(e) => handleBilling(e)}
-                    required
                   />
                 </div>
                 <div>
