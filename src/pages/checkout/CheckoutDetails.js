@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  CALCULATE_SUBTOTAL,
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "../../redux/slice/cartSlice";
@@ -54,120 +55,120 @@ const CheckoutDetails = () => {
     dispatch(SAVE_BILLING_ADDRESS(shippingAddress));
     navigate("/checkout");
   };
+
+  useEffect(() => {
+    dispatch(CALCULATE_SUBTOTAL());
+  }, [dispatch]);
   return (
     <div className="w-full">
-      <div className="w-full px-20 py-12">
+      <div className="w-full px-4 md:px-20 py-4 md:py-12">
         <p className="text-4xl font-semibold pb-4">Checkout Details</p>
         <div className="md:flex">
-          <div className="w-[55%] shadow-2xl p-3">
-            <div className="">
-              <p className="text-3xl ">Shipping Address</p>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <p className="text-lg font-bold my-2">Recipient Name:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="Recipient name"
-                    value={shippingAddress.name}
-                    name="name"
-                    onChange={(e) => handleShipping(e)}
-                    required
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">Address line 1:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="Address line 1"
-                    value={shippingAddress.line1}
-                    name="line1"
-                    onChange={(e) => handleShipping(e)}
-                    required
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">Address line 2:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="Address line 2"
-                    value={shippingAddress.line2}
-                    name="line2"
-                    onChange={(e) => handleShipping(e)}
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">City:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="City"
-                    value={shippingAddress.city}
-                    name="city"
-                    onChange={(e) => handleShipping(e)}
-                    required
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">State:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="State"
-                    value={shippingAddress.state}
-                    name="state"
-                    onChange={(e) => handleShipping(e)}
-                    required
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">Postal Code:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="Postal Code"
-                    value={shippingAddress.postal_code}
-                    name="postal_code"
-                    onChange={(e) => handleShipping(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">Country:</p>
-                  <CountryDropdown
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    valueType="short"
-                    value={shippingAddress.country}
-                    onChange={(val) =>
-                      handleShipping({
-                        target: {
-                          name: "country",
-                          value: val,
-                        },
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold my-2">Phone:</p>
-                  <input
-                    className="border-[1.5px] border-black p-2 rounded-md w-full"
-                    type="text"
-                    placeholder="Phone"
-                    value={shippingAddress.phone}
-                    name="phone"
-                    onChange={(e) => handleShipping(e)}
-                    required
-                  />
-                </div>
-              </form>
-            </div>
+          <div className="w-ful md:w-[55%] shadow-2xl p-3">
+            <p className="text-3xl ">Shipping Address</p>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <p className="text-lg font-bold my-2">Recipient Name:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Recipient name"
+                  value={shippingAddress.name}
+                  name="name"
+                  onChange={(e) => handleShipping(e)}
+                  required
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">Address line 1:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Address line 1"
+                  value={shippingAddress.line1}
+                  name="line1"
+                  onChange={(e) => handleShipping(e)}
+                  required
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">Address line 2:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Address line 2"
+                  value={shippingAddress.line2}
+                  name="line2"
+                  onChange={(e) => handleShipping(e)}
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">City:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="City"
+                  value={shippingAddress.city}
+                  name="city"
+                  onChange={(e) => handleShipping(e)}
+                  required
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">State:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="State"
+                  value={shippingAddress.state}
+                  name="state"
+                  onChange={(e) => handleShipping(e)}
+                  required
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">Postal Code:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Postal Code"
+                  value={shippingAddress.postal_code}
+                  name="postal_code"
+                  onChange={(e) => handleShipping(e.target.value)}
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">Country:</p>
+                <CountryDropdown
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  valueType="short"
+                  value={shippingAddress.country}
+                  onChange={(val) =>
+                    handleShipping({
+                      target: {
+                        name: "country",
+                        value: val,
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <p className="text-lg font-bold my-2">Phone:</p>
+                <input
+                  className="border-[1.5px] border-black p-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Phone"
+                  value={shippingAddress.phone}
+                  name="phone"
+                  onChange={(e) => handleShipping(e)}
+                  required
+                />
+              </div>
 
-            {/* Billing address */}
-            <div className=" mt-12">
-              <p className="text-3xl ">Billing Address</p>
-              <form onSubmit={handleBilling}>
+              {/* Billing address */}
+              <div className=" mt-12">
+                <p className="text-3xl ">Billing Address</p>
                 <div>
                   <p className="text-lg font-bold my-2">Recipient Name:</p>
                   <input
@@ -272,10 +273,10 @@ const CheckoutDetails = () => {
                     Proceed To Checkout
                   </button>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-          <div className="w-[45%]">
+          <div className="w-ful md:w-[45%] mt-9 md:mt-0">
             {cartItems.length === 0 ? (
               <div>
                 <p className="text-2xl">No item in your cart</p>
