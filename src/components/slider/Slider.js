@@ -52,6 +52,10 @@ const Slider = () => {
     setCurrentSlide(0);
   }, []);
 
+  const scrollDown = () => {
+    window.scrollTo({ top: 650, behavior: "smooth" });
+  };
+
   useEffect(() => {
     if (autoScroll) {
       const auto = () => {
@@ -82,12 +86,12 @@ const Slider = () => {
                 {slides[currentSlide].desc}
               </p>
               <hr className="h-2 text-white w-full" />
-              <a
-                href="#product"
+              <button
+                onClick={scrollDown}
                 className="p-2 md:p-4 bg-blue-700 rounded-lg text-xl md:text-2xl"
               >
                 Shop Now
-              </a>
+              </button>
             </div>
           </div>
         </div>
