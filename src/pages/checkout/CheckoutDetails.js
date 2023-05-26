@@ -9,6 +9,7 @@ import { selectCartItems } from "../../redux/slice/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { CountryDropdown } from "react-country-region-selector";
 import { SAVE_BILLING_ADDRESS } from "../../redux/slice/checkoutSlice";
+import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
 
 const initialAddressState = {
   name: "",
@@ -29,8 +30,6 @@ const CheckoutDetails = () => {
     ...initialAddressState,
   });
 
-  const cartTotalAmount = useSelector(selectCartTotalAmount);
-  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,10 +56,11 @@ const CheckoutDetails = () => {
   };
 
   useEffect(() => {
-    dispatch(CALCULATE_SUBTOTAL());
-  }, [dispatch]);
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <div className="w-full px-4 md:px-20 py-4 md:py-12">
         <p className="text-4xl font-semibold pb-4">Checkout Details</p>
         <div className="md:flex">
@@ -285,43 +285,7 @@ const CheckoutDetails = () => {
                 </Link>
               </div>
             ) : (
-              <div className="flex ">
-                <div className="w-full p-4 shadow-2xl rounded-2xl">
-                  <p className="text-lg md:text-3xl font-semibold">
-                    Checkout Summary
-                  </p>
-                  <p className="text-lg md:text-xl font-semibold my-2">{`Cart item(s): ${cartTotalQuantity}`}</p>
-                  <div className="flex justify-between ">
-                    <p className="text-2xl md:text-2xl font-semibold">
-                      Subtotal
-                    </p>
-                    <p className="text-2xl text-orange-500 md:text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
-                      2
-                    )}`}</p>
-                  </div>
-                  <div className="">
-                    {cartItems.map((cart, index) => {
-                      const { name, price, cartQuantity } = cart;
-
-                      return (
-                        <div
-                          className="border-[3px] border-blue-500 rounded-md mb-2"
-                          key={index}
-                        >
-                          <div className="p-2">
-                            <p className="text-lg font-semibold">
-                              Product: <p className="font-medium">{name}</p>
-                            </p>
-                            <p>Quantity: {cartQuantity} </p>
-                            <p>Unit Price: {price * cartQuantity}</p>
-                            <p>Set Price: {price}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
+              <CheckoutSummary />
             )}
           </div>
         </div>

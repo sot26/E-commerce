@@ -43,6 +43,7 @@ const Cart = () => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CART_TOTAL_QUANTITY());
     dispatch(SAVE_URL(""));
+    window.scrollTo(0, 0);
   }, [dispatch, cartItems]);
 
   const url = window.location.href;
