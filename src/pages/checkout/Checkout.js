@@ -11,6 +11,8 @@ import {
   selectBillingAddress,
   selectsSippingAddress,
 } from "../../redux/slice/checkoutSlice";
+import { toast } from "react-toastify";
+import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 
 const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
 
@@ -24,15 +26,35 @@ const CheckOut = () => {
   const billingAddress = useSelector(selectBillingAddress);
   const shippingAddress = useSelector(selectsSippingAddress);
 
+  const description = `Eshop payment : email: ${customerEmail}, Amount: ${totalAmount}`;
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("/create-payment-intent", {
+    fetch("http://localhost:4242/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      body: JSON.stringify({
+        items: cartItems,
+        userEmail: customerEmail,
+        shipping: shippingAddress,
+        billing: billingAddress,
+        description: description,
+      }),
     })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((json) => Promise.reject(json));
+        }
+      })
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+      })
+      .catch((error) => {
+        setMessage("Failed to initialise checkout");
+        toast.error("Something went wrong");
+      });
   }, []);
 
   const appearance = {
@@ -43,7 +65,18 @@ const CheckOut = () => {
     appearance,
   };
 
-  return <div>CheckOut</div>;
+  return (
+    <div>
+      <div>
+        <div> {!clientSecret && <p>{message}</p>}</div>
+      </div>
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </div>
+  );
 };
 
 export default CheckOut;
