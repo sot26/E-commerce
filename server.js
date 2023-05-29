@@ -11,8 +11,17 @@ app.get("/", (req, res) => {
   res.send("Wekcome to Eshop website.");
 });
 
+const array = [];
 const calculateOrderAmount = (items) => {
-  return 1400 * 100;
+  items.map((item) => {
+    const { price, cartQuantity } = item;
+    const cartItemAmount = price * cartQuantity;
+    return array.push(cartItemAmount);
+  });
+  const totalAmount = array.reduce((a, b) => {
+    return a + b;
+  }, 0);
+  return totalAmount * 100;
 };
 
 app.post("/create-payment-intent", async (req, res) => {
@@ -25,6 +34,19 @@ app.post("/create-payment-intent", async (req, res) => {
     automatic_payment_methods: {
       enabled: true,
     },
+    description,
+    shipping: {
+      address: {
+        line1: shipping.line1,
+        line2: shipping.line2,
+        city: shipping.city,
+        country: shipping.country,
+        postal_code: shipping.postal_code,
+      },
+      name: shipping.name,
+      phone: shipping.phone,
+    },
+    // receipt_email:userEmail
   });
 
   res.send({
