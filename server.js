@@ -34,6 +34,7 @@ app.post("/create-payment-intent", async (req, res) => {
     automatic_payment_methods: {
       enabled: true,
     },
+
     description,
     shipping: {
       address: {
