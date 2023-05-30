@@ -5,6 +5,8 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
+import { RotatingLines } from "react-loader-spinner";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -66,20 +68,43 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement
-        id="link-authentication-element"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <div>
+      <div>
+        <p>Checkout</p>
+        <form onClick={handleSubmit} className="flex">
+          <div>
+            <CheckoutSummary />
+          </div>
+          <div>
+            <p>Stripe Checkout</p>
+            <PaymentElement
+              id="payment-element"
+              options={paymentElementOptions}
+            />
+            <button disabled={isLoading || !stripe || !elements} id="submit">
+              <span id="button-text">
+                {isLoading ? (
+                  <div className="w-full min-h-[100vh] flex justify-center items-center  md:ml-[-250px]">
+                    <RotatingLines
+                      strokeColor="orange"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="150"
+                      visible={true}
+                      className="flex justify-center items-center"
+                    />
+                  </div>
+                ) : (
+                  "Pay now"
+                )}
+              </span>
+            </button>
+            {/* Show any error or success messages */}
+            {message && <div id="payment-message">{message}</div>}
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
