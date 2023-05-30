@@ -9,12 +9,12 @@ import {
 } from "../../redux/slice/cartSlice";
 import {
   selectBillingAddress,
-  selectsSippingAddress,
+  selectShippingAddress,
 } from "../../redux/slice/checkoutSlice";
 import { toast } from "react-toastify";
 import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 
-const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+const stripePromise = loadStripe(`${process.env.STRIPE_PRIVATE_KEY}`);
 
 const CheckOut = () => {
   const [message, setMessage] = useState("Initializing checkout");
@@ -24,7 +24,7 @@ const CheckOut = () => {
   const totalAmount = useSelector(selectCartTotalAmount);
   const customerEmail = useSelector(selectEmail);
   const billingAddress = useSelector(selectBillingAddress);
-  const shippingAddress = useSelector(selectsSippingAddress);
+  const shippingAddress = useSelector(selectShippingAddress);
 
   const description = `Eshop payment : email: ${customerEmail}, Amount: ${totalAmount}`;
 
@@ -53,7 +53,7 @@ const CheckOut = () => {
       })
       .catch((error) => {
         setMessage("Failed to initialise checkout");
-        toast.error("Something went wrong");
+        toast.error("Something went wrong!!!");
       });
   }, []);
 
