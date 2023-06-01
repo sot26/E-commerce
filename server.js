@@ -1,14 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(`${process.env.STRIPE_PRIVATE_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Wekcome to Eshop website.");
+  res.send("Welcome to Eshop website.");
 });
 
 const array = [];
@@ -31,9 +31,7 @@ app.post("/create-payment-intent", async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
     currency: "usd",
-    automatic_payment_methods: {
-      enabled: true,
-    },
+    payment_method_types: ["card"],
 
     description,
     shipping: {
@@ -47,7 +45,7 @@ app.post("/create-payment-intent", async (req, res) => {
       name: shipping.name,
       phone: shipping.phone,
     },
-    // receipt_email:userEmail
+    // receipt_email: userEmail
   });
 
   res.send({
