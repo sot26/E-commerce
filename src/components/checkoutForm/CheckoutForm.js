@@ -7,10 +7,12 @@ import {
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
@@ -64,6 +66,7 @@ const CheckoutForm = () => {
             setIsLoading(false);
             toast.success("Payment Successfull");
             saveOrder();
+            navigate("/checkout-success");
           }
         }
       });
@@ -72,31 +75,38 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div>
-      <div>
-        <p>Checkout</p>
-        <form onClick={handleSubmit} className="flex">
-          <div>
+    <div className="w-full h-full">
+      <div className="w-full h-full ">
+        <form
+          onClick={handleSubmit}
+          className=" w-full min-h-[100vh] md:flex justify-center items-center"
+        >
+          <div className="mr-6 min-w-[500px]">
+            <p className="text-2xl">Checkout</p>
             <CheckoutSummary />
           </div>
           <div>
-            <p>Stripe Checkout</p>
+            <p className="text-xl">Stripe Checkout</p>
             <PaymentElement id="payment-element" />
-            <button disabled={isLoading || !stripe || !elements} id="submit">
-              <span id="button-text">
+            <button
+              disabled={isLoading || !stripe || !elements}
+              id="submit"
+              className="bg-blue-600 text-white w-full rounded-lg font-medium mt-3"
+            >
+              <span id="button-text w-full">
                 {isLoading ? (
-                  <div className="w-full min-h-[100vh] flex justify-center items-center  md:ml-[-250px]">
+                  <div className="">
                     <RotatingLines
-                      strokeColor="orange"
+                      strokeColor="white"
                       strokeWidth="5"
                       animationDuration="0.75"
-                      width="150"
+                      width="30"
                       visible={true}
-                      className="flex justify-center items-center"
+                      className="w-full flex justify-center items-center"
                     />
                   </div>
                 ) : (
-                  "Pay now"
+                  <p className="p-2">Pay now</p>
                 )}
               </span>
             </button>

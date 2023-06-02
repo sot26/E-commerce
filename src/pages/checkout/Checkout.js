@@ -14,7 +14,7 @@ import {
 import { toast } from "react-toastify";
 import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 
-const stripePromise = loadStripe(`${process.env.STRIPE_PRIVATE_KEY}`);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`);
 
 const CheckOut = () => {
   const [message, setMessage] = useState("Initializing checkout");
@@ -66,7 +66,7 @@ const CheckOut = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-[100vh]">
       <div>
         <div> {!clientSecret && <p>{message}</p>}</div>
       </div>
