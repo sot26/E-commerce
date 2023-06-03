@@ -8,6 +8,8 @@ import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase/config";
+import { addDoc, collection } from "firebase/firestore";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -33,7 +35,14 @@ const CheckoutForm = () => {
   }, [stripe]);
 
   const saveOrder = () => {
-    console.log("Order saved");
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    try {
+      addDoc(collection(db, "orders"), {});
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -81,8 +90,8 @@ const CheckoutForm = () => {
           onClick={handleSubmit}
           className=" w-full min-h-[100vh] md:flex justify-center items-center"
         >
-          <div className="mr-6 min-w-[500px]">
-            <p className="text-2xl">Checkout</p>
+          <div className="mr-6 min-w-[400px]">
+            <p className="text-4xl mb-7">Checkout</p>
             <CheckoutSummary />
           </div>
           <div>
