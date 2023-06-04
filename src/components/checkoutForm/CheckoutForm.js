@@ -38,6 +38,7 @@ const CheckoutForm = () => {
     const today = new Date();
     const date = today.toDateString();
     const time = today.toLocaleTimeString();
+
     try {
       addDoc(collection(db, "orders"), {});
     } catch (error) {
