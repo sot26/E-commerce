@@ -9,16 +9,31 @@ import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/config";
-import { addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CLEAR_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+} from "../../redux/slice/cartSlice";
+import { selectEmail, selectUserID } from "../../redux/slice/authSlice";
+import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
 
 const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const stripe = useStripe();
+  const elements = useElements();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userID = useSelector(selectUserID);
+  const userEmail = useSelector(selectEmail);
+  const cartItems = useSelector(selectCartItems);
+  const shippingAddress = useSelector(selectShippingAddress);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
 
   useEffect(() => {
     if (!stripe) {
@@ -38,9 +53,22 @@ const CheckoutForm = () => {
     const today = new Date();
     const date = today.toDateString();
     const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderDate: date,
+      orderTime: time,
+      orderAmount: cartTotalAmount,
+      orderStatus: "Order Placed",
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
 
     try {
-      addDoc(collection(db, "orders"), {});
+      addDoc(collection(db, "orders"), orderConfig);
+      dispatch(CLEAR_CART());
+      toast.success("Order saved");
     } catch (error) {
       toast.error(error.message);
     }

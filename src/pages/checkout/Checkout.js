@@ -17,7 +17,7 @@ import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`);
 
 const CheckOut = () => {
-  const [message, setMessage] = useState("Initializing checkout");
+  const [message, setMessage] = useState("Initializing checkout...");
   const [clientSecret, setClientSecret] = useState("");
 
   const cartItems = useSelector(selectCartItems);

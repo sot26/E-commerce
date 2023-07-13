@@ -17,6 +17,7 @@ import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
+import OrderDetails from "./pages/orderDetails/OrderDetails";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/order-details" element={<OrderDetails />} />
           <Route
             path="/admin/*"
             element={

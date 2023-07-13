@@ -8,11 +8,11 @@ import ViewProducts from "../../components/admin/viewProducts/ViewProducts";
 
 const Admin = () => {
   return (
-    <div className="w-full h-full flex">
-      <div className="w-[25%] h-full">
+    <div className="w-full h-full flex flex-col lg:flex-row min-h-[100vh]">
+      <div className="lg:w-[25%] w-full h-full">
         <Navbar />
       </div>
-      <div className="w-[75%] h-full">
+      <div className="lg:w-[75%] w-full px-3 lg:px-0 h-full">
         <Routes>
           <Route path="home" element={<Home />} />
           <Route path="orders" element={<Orders />} />
