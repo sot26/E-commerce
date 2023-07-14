@@ -11,36 +11,23 @@ import {
   DECREASE_CART,
   selectCartItems,
 } from "../../../redux/slice/cartSlice";
+import useFetchDocument from "../../../customHooks/useFetchDocument";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
+  const { document } = useFetchDocument("products", id);
 
   const cart = cartItems.find((cart) => cart.id === id);
   const isCartAdded = cartItems.findIndex((cart) => {
     return cart.id === id;
   });
 
-  const getProduct = async () => {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const obj = {
-        id: id,
-        ...docSnap.data(),
-      };
-      return setProduct(obj);
-    } else {
-      toast.error("Product not found");
-    }
-  };
-
   useEffect(() => {
-    getProduct();
-  }, []);
+    setProduct(document);
+  }, [document]);
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
@@ -55,12 +42,12 @@ const ProductDetails = () => {
   return (
     <div className="w-ful h-full mx-1 mb-4 md:mx-24 min-h-[90vh]">
       <div>
-        <p className="text-4xl md:text-6xl mt-3 ">Product Details</p>
+        <p className="text-3xl md:text-4xl mt-3 ">Product Details</p>
         <Link to="/#products">
           <p className="text-lg my-4 md:text-2xl">&larr; Back to Products</p>
         </Link>
       </div>
-      {product.length === 0 ? (
+      {product === null ? (
         <Circles
           height="80"
           width="80"
