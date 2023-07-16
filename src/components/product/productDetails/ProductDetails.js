@@ -12,6 +12,8 @@ import {
   selectCartItems,
 } from "../../../redux/slice/cartSlice";
 import useFetchDocument from "../../../customHooks/useFetchDocument";
+import useFetchCollection from "../../../customHooks/useFetchCollection";
+import StarsRating from "react-star-rate";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -19,11 +21,14 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const { document } = useFetchDocument("products", id);
+  const { data } = useFetchCollection("reviews");
+  const filteredReview = data.filter((review) => review.productID === id);
 
   const cart = cartItems.find((cart) => cart.id === id);
   const isCartAdded = cartItems.findIndex((cart) => {
     return cart.id === id;
   });
+  console.log(data);
 
   useEffect(() => {
     setProduct(document);
@@ -58,7 +63,7 @@ const ProductDetails = () => {
           visible={true}
         />
       ) : (
-        <div className="md:flex">
+        <div className="lg:flex">
           <img
             src={product.imageURL}
             alt={product.name}
@@ -104,6 +109,34 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
+      <div className="w-fll">
+        {filteredReview.length === 0 ? (
+          <p className="mt-4">No review for this project yet</p>
+        ) : (
+          <div>
+            {filteredReview.map((review, index) => {
+              return (
+                <div
+                  key={index}
+                  className="mt-4 p-3 max-w-[600px] shadow-xl rounded-lg"
+                >
+                  <div>
+                    <p className="text-2xl border-b-[2px]">Product Review</p>
+                    <div>
+                      <StarsRating disabled value={review.rate} />
+                    </div>
+                    <p className="text-lg mb-2">{review.review}</p>
+                    <p className="text-sm font-semibold">{review.reviewDate}</p>
+                    <p className="text-sm font-semibold">
+                      By: {review.userName}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

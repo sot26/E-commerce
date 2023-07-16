@@ -69,6 +69,7 @@ const CheckoutForm = () => {
       addDoc(collection(db, "orders"), orderConfig);
       dispatch(CLEAR_CART());
       toast.success("Order saved");
+      navigate("/checkout-success");
     } catch (error) {
       toast.error(error.message);
     }

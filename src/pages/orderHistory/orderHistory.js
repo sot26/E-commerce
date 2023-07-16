@@ -48,7 +48,7 @@ const OrderHistory = () => {
         ) : (
           <table className="w-full ">
             <thead>
-              <tr className="text-[13px] md:text-3xl font-bold border-[3px] border-blue-300  ">
+              <tr className="text-[13px] md:text-2xl font-bold border-[3px] border-blue-300  ">
                 <td className="border-r-2 border-blue-300">s/n</td>
                 <td className="border-r-2 border-blue-300">Date</td>
                 <td className="border-r-2 border-blue-300">Order ID</td>

@@ -89,7 +89,7 @@ const Header = () => {
       <div
         className={
           scrollPage
-            ? `fixed h-[60px] sm:h-[80px] bg-black text-white w-full z-10`
+            ? `fixed top-0 h-[60px] sm:h-[80px] bg-black text-white w-full z-10`
             : "h-[60px] sm:h-[80px] bg-black text-white w-full z-10"
         }
       >
@@ -173,7 +173,7 @@ const Header = () => {
             className={
               !nav
                 ? "hidden"
-                : "absolute  duration-500 ease-in-out top-0 left-0 w-full h-[100vh] text-white  shadow-md font-bold shadow-[#354259] flex"
+                : "absolute  duration-500 ease-in-out top-0 left-0 w-full h-[80vh] text-white  shadow-md font-bold shadow-[#354259] flex"
             }
           >
             <div className="bg-black w-[300px] h-[100vh] z-10 relative">
@@ -259,7 +259,7 @@ const Header = () => {
                   <li className="py-3 px-2">
                     <Link
                       onClick={navClick}
-                      to="/orders"
+                      to="/order"
                       className="cursor-pointer hover:text-orange-600"
                     >
                       My Orders

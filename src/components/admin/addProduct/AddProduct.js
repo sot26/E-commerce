@@ -168,7 +168,7 @@ const AddProduct = () => {
             )}
 
             <input
-              className="border-[1px] rounded-xl w-full p-3 h-[40px] cursor-pointer"
+              className="border-[1px] rounded-xl w-full p-3  cursor-pointer"
               type="file"
               accept="image/*"
               name="image"
@@ -204,7 +204,7 @@ const AddProduct = () => {
         <div className="py-2">
           <p className="text-xl md:text-2xl pb-2">Product Category</p>
           <select
-            className="border-[3px] rounded-xl w-full p-3 h-[40px]"
+            className="border-[3px] text-lg rounded-xl w-full p-3 "
             required
             name="category"
             value={product.category}
