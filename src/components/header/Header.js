@@ -194,7 +194,7 @@ const Header = () => {
                 </li>
                 <li className="">
                   <AdminOnlyLink>
-                    <Link to="/admin/home">
+                    <Link to="/admin/home" onClick={navClick}>
                       <button className="p-2 mx-2 bg-blue-700 rounded-lg">
                         Admin
                       </button>
