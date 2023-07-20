@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import InfoBox from "../../InfoBox/InfoBox";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BsCart4 } from "react-icons/bs";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct } from "../../../redux/slice/productSlice";
 import {
+  STORE_PRODUCTS,
+  selectProduct,
+} from "../../../redux/slice/productSlice";
+import {
+  CALC_TOTAL_ORDER_AMOUNT,
+  STORE_ORDERS,
   selectOrderHistory,
   selectTotalOrderAmount,
 } from "../../../redux/slice/orderSlice";
+import useFetchCollection from "../../../customHooks/useFetchCollection";
 
 const Home = () => {
   const products = useSelector(selectProduct);
   const orders = useSelector(selectOrderHistory);
   const totalOrderAmount = useSelector(selectTotalOrderAmount);
-  console.log(orders);
+
+  const fbProducts = useFetchCollection("products");
+  const { data } = useFetchCollection("orders");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      STORE_PRODUCTS({
+        products: fbProducts.data,
+      })
+    );
+    dispatch(STORE_ORDERS(data));
+
+    dispatch(CALC_TOTAL_ORDER_AMOUNT());
+  }, [dispatch, data, fbProducts]);
 
   return (
     <div className="w-full h-full p-[40px]">

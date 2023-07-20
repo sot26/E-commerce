@@ -14,7 +14,7 @@ const orderSlice = createSlice({
     },
     CALC_TOTAL_ORDER_AMOUNT(state, action) {
       const array = [];
-      state.totalOrderAmount.map((item) => {
+      state.orderHistory.map((item) => {
         const { orderAmount } = item;
         return array.push(orderAmount);
       });
