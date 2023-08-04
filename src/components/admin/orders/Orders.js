@@ -59,17 +59,27 @@ const Orders = () => {
               return (
                 <tbody key={id} className="cursor-pointer">
                   <tr
-                    className="text-[12px] sm:text-xl md:text-[20px]  shadow-md border-[2px] border-black"
+                    className="text-[13px] md:text-[20px]  shadow-md border-[2px] border-black mt-2"
                     key={id}
                     onClick={() => handleClick(id)}
                   >
                     <td className=" border-r-2 border-black">{index + 1}</td>
-                    <td className="border-r-2">
+                    <td className="border-r-2 border-black">
                       {orderDate} at {orderTime}
                     </td>
                     <td className=" border-r-2 border-black">{id}</td>
                     <td className=" border-r-2 border-black">${orderAmount}</td>
-                    <td className=" border-r-2 border-black">{orderStatus}</td>
+                    <td className=" border-r-2 border-black">
+                      <p
+                        className={
+                          orderStatus !== "Delivered"
+                            ? "text-red-400"
+                            : "text-green-500"
+                        }
+                      >
+                        {orderStatus}
+                      </p>
+                    </td>
                   </tr>
                 </tbody>
               );

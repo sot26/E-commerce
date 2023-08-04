@@ -15,6 +15,7 @@ import {
   selectTotalOrderAmount,
 } from "../../../redux/slice/orderSlice";
 import useFetchCollection from "../../../customHooks/useFetchCollection";
+import Chart from "../../chart/Chart";
 
 const Home = () => {
   const products = useSelector(selectProduct);
@@ -62,6 +63,7 @@ const Home = () => {
           iconClassName="text-orange-500"
         />
       </div>
+      <Chart />
     </div>
   );
 };

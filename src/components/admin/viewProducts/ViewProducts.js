@@ -1,11 +1,4 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import React, { useEffect, useState } from "react";
@@ -19,9 +12,17 @@ import {
   selectProduct,
   STORE_PRODUCTS,
 } from "../../../redux/slice/productSlice";
+import {
+  FILTER_BY_SEARCH,
+  selectFilteredProducts,
+} from "../../../redux/slice/filterSlice";
+import Search from "../../search/Search";
+import Pagination from "../../pagination/Pagination";
 
 const ViewProducts = () => {
+  const [search, setSearch] = useState("");
   const { data } = useFetchCollection("products");
+  const filteredProducts = useSelector(selectFilteredProducts);
   const products = useSelector(selectProduct);
 
   const dispatch = useDispatch();
@@ -33,6 +34,21 @@ const ViewProducts = () => {
       })
     );
   }, [dispatch, data]);
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products: products, search: search }));
+  }, [dispatch, search, products]);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(10);
+
+  //get current product
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
@@ -69,10 +85,16 @@ const ViewProducts = () => {
     <div>
       <div className="w-full min-h-[85vh]">
         <div className="w-full text-center pt-4 md:pt-10 text-3xl pb-2 md:text-4xl font-semibold md:font-bold">
-          View products
+          All products
+        </div>
+        <div className="my-3">
+          <p>
+            <b>{filteredProducts.length}</b> Product(s) found
+          </p>
+          <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         <div>
-          {products.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <p>No product found</p>
           ) : (
             <table className="w-full">
@@ -86,7 +108,7 @@ const ViewProducts = () => {
                   <td className="border-r-2">Actions</td>
                 </tr>
               </thead>
-              {products.map((product, index) => {
+              {currentProducts.map((product, index) => {
                 const { name, id, price, imageURL, category } = product;
 
                 return (
@@ -123,6 +145,14 @@ const ViewProducts = () => {
             </table>
           )}
         </div>
+      </div>
+      <div className="my-4">
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          productsPerPage={productsPerPage}
+          totalProducts={filteredProducts}
+        />
       </div>
     </div>
   );

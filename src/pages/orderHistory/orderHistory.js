@@ -12,7 +12,6 @@ const OrderHistory = () => {
   const navigate = useNavigate();
   const orders = useSelector(selectOrderHistory);
   const userID = useSelector(selectUserID);
-  console.log(data);
 
   useEffect(() => {
     dispatch(STORE_ORDERS(data));

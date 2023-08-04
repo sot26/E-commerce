@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useFetchDocument from "../../../customHooks/useFetchDocument";
 import { Circles } from "react-loader-spinner";
+import ChangeOrderStatus from "../changeOrderStatus/ChangeOrderStatus";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,6 @@ const OrderDetails = () => {
   useEffect(() => {
     setOrder(document);
   }, [document]);
-  console.log(order);
   return (
     <div className="w-full min-h-[100vh] px-2 ">
       <div>
@@ -43,9 +43,19 @@ const OrderDetails = () => {
           <p className="font-bold flex">
             Order Status : <p className="font-normal">{order.orderStatus}</p>
           </p>
-          <p className="font-bold flex">
-            Shipping Address :{" "}
-            <p className="font-normal">{order.shippingAddress.line1}</p>
+          <p className="font-bold flex flex-col">
+            <div className="flex">
+              Shipping Address :
+              <p className="font-normal">
+                {order.shippingAddress.line1}, {order.shippingAddress.line2},{" "}
+                {order.shippingAddress.city}
+              </p>
+            </div>
+            <p className="font-normal"> State: {order.shippingAddress.state}</p>
+            <p className="font-normal">
+              {" "}
+              Country: {order.shippingAddress.country}
+            </p>
           </p>
 
           <table className="w-full">
@@ -56,7 +66,6 @@ const OrderDetails = () => {
                 <td className="border-r-2">Price</td>
                 <td className="border-r-2">Quantity</td>
                 <td className="border-r-2">Total</td>
-                <td className="border-r-2">Actions</td>
               </tr>
             </thead>
             <tbody key={id}>
@@ -81,13 +90,6 @@ const OrderDetails = () => {
                     <td className=" border-r-2">
                       ${(price * cartQuantity).toFixed(2)}
                     </td>
-                    <td className=" border-r-2">
-                      <Link to={`/review-product/${id}`}>
-                        <button className="py-2 px-3 font-semibold text-white bg-blue-600 text-sm rounded-xl">
-                          Review Product
-                        </button>
-                      </Link>
-                    </td>
                   </tr>
                 );
               })}
@@ -95,6 +97,7 @@ const OrderDetails = () => {
           </table>
         </div>
       )}
+      <ChangeOrderStatus order={order} id={id} />
     </div>
   );
 };

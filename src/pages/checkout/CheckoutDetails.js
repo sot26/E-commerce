@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  CALCULATE_SUBTOTAL,
-  selectCartTotalAmount,
-  selectCartTotalQuantity,
-} from "../../redux/slice/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../redux/slice/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { CountryDropdown } from "react-country-region-selector";
-import { SAVE_BILLING_ADDRESS } from "../../redux/slice/checkoutSlice";
+import {
+  SAVE_BILLING_ADDRESS,
+  SAVE_SHIPPING_ADDRESS,
+} from "../../redux/slice/checkoutSlice";
 import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
 
 const initialAddressState = {
@@ -21,7 +19,6 @@ const initialAddressState = {
   country: "",
   phone: "",
 };
-
 const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
@@ -51,7 +48,7 @@ const CheckoutDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(SAVE_BILLING_ADDRESS(billingAddress));
-    dispatch(SAVE_BILLING_ADDRESS(shippingAddress));
+    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
     navigate("/checkout");
   };
 

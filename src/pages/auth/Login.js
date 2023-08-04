@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.png";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   GoogleAuthProvider,
@@ -40,7 +40,6 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        console.log(error);
       });
   };
 

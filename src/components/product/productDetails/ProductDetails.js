@@ -1,8 +1,5 @@
-import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { db } from "../../../firebase/config";
-import { toast } from "react-toastify";
 import { Circles } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,7 +25,6 @@ const ProductDetails = () => {
   const isCartAdded = cartItems.findIndex((cart) => {
     return cart.id === id;
   });
-  console.log(data);
 
   useEffect(() => {
     setProduct(document);

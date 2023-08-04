@@ -19,6 +19,7 @@ import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
 import OrderDetails from "./pages/orderDetails/OrderDetails";
 import ReviewProduct from "./pages/reviewProduct.js/ReviewProduct";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-details/:id" element={<OrderDetails />} />
           <Route path="/review-product/:id" element={<ReviewProduct />} />
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/admin/*"
             element={

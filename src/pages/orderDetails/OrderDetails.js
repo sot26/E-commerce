@@ -11,7 +11,6 @@ const OrderDetails = () => {
   useEffect(() => {
     setOrder(document);
   }, [document]);
-  console.log(order);
 
   return (
     <div className="w-full min-h-[100vh] px-1 mb-4 md:px-24">

@@ -19,7 +19,6 @@ const useFetchCollection = (collectionName) => {
           ...doc.data(),
         }));
         setData(allData);
-        // console.log(allData);
         setIsLoading(false);
       });
     } catch (error) {

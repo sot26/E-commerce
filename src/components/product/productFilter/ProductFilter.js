@@ -15,14 +15,10 @@ const ProductFilter = () => {
   const [category, setCategory] = useState("All");
   const [brand, setBrand] = useState("All");
   const [price, setPrice] = useState(3000);
-  const [nav, setNav] = useState(false);
 
   const products = useSelector(selectProduct);
   const dispatch = useDispatch();
 
-  function navClick() {
-    setNav(!nav);
-  }
   const minPrice = useSelector(selectMinPrice);
   const maxPrice = useSelector(selectMaxPrice);
 
@@ -34,7 +30,6 @@ const ProductFilter = () => {
     "All",
     ...new Set(products.map((product) => product.brand)),
   ];
-  console.log(allBrands);
 
   useEffect(() => {
     dispatch(SORT_BY_BRANDS({ products, brand }));
@@ -109,7 +104,7 @@ const ProductFilter = () => {
         <div>
           <button
             onClick={clearFilters}
-            className="min-w-[100px] md:w-[120px] text-white bg-orange-500 rounded-lg border-2 text-md md:text-xl p-2 hover:translate-y-1 hover:duration-200"
+            className="min-w-[100px] md:w-[120px] text-white bg-orange-500 rounded-lg border-2 text-md md:text-lg p-2  hover:translate-y-1 hover:duration-200"
           >
             Clear Filter
           </button>

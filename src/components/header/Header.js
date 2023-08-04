@@ -49,12 +49,10 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log(user);
         if (user.displayName == null) {
           const u1 = user.email.substring(0, user.email.indexOf("@"));
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
           setdisplayName(uName);
-          // console.log(user);
         } else {
           setdisplayName(user.displayName);
         }
@@ -293,7 +291,7 @@ const Header = () => {
             </div>
             <div
               onClick={navClick}
-              className="relative w-full h-full bg-black opacity-50 z-10"
+              className="relative w-full h-[100vh] bg-black opacity-50 z-10"
             ></div>
           </div>
         </div>
