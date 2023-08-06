@@ -77,7 +77,7 @@ const ReviewProduct = () => {
                 className="h-[150px]  w-auto"
               />
             </div>
-            <div className="mt-6 rounded-xl shadow-xl p-3 w-fit">
+            <div className="mt-6 rounded-xl shadow-xl p-3 max-w-[420px]">
               <form onSubmit={(e) => submitReview(e)}>
                 <p>Rating </p>
                 <StarsRating
@@ -86,14 +86,13 @@ const ReviewProduct = () => {
                     setRate(rate);
                   }}
                 />
-                <div className="flex flex-col min-w-[400px]">
+                <div className="flex flex-col min-w-[270px] max-w-[400px]">
                   <p>Review</p>
                   <textarea
                     value={review}
-                    cols="30"
-                    rows="10"
+                    rows={7}
                     onChange={(e) => setReview(e.target.value)}
-                    className="border-[2px] p-2"
+                    className="border-[2px] p-2 w-auto"
                   />
                 </div>
                 <button

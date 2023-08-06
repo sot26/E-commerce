@@ -34,13 +34,13 @@ const OrderDetails = () => {
         />
       ) : (
         <div>
-          <p className="font-bold flex">
+          <p className="font-bold text-md md:text-base flex">
             Order ID : <p className="font-normal">{order.id}</p>
           </p>
-          <p className="font-bold flex">
+          <p className="font-bold text-md md:text-base flex">
             Order Amount : $<p className="font-normal">{order.orderAmount}</p>
           </p>
-          <p className="font-bold flex">
+          <p className="font-bold text-md md:text-base flex">
             Order Status : <p className="font-normal">{order.orderStatus}</p>
           </p>
 
@@ -61,7 +61,7 @@ const OrderDetails = () => {
                 return (
                   <tr
                     key={id}
-                    className="text-md sm:text-xl md:text-[20px] font-medium shadow-md"
+                    className="text-[10px] md:text-2xl  font-medium shadow-md"
                   >
                     <td className=" border-r-2">{index + 1}</td>
                     <td className="border-r-2">
@@ -79,7 +79,7 @@ const OrderDetails = () => {
                     </td>
                     <td className=" border-r-2">
                       <Link to={`/review-product/${id}`}>
-                        <button className="py-2 px-3 font-semibold text-white bg-blue-600 text-sm rounded-xl">
+                        <button className=" text-[8px] md:text-2xl px-2 py-2 md:py-2 md:px-3 font-semibold text-white bg-blue-600 rounded-sm md:rounded-xl">
                           Review Product
                         </button>
                       </Link>

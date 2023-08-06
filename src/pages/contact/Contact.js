@@ -95,7 +95,7 @@ const Contact = () => {
                 <div className="flex gap-2 items-center">
                   <FiPhoneCall size={20} /> +2348133168490
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-wrap gap-2 items-center">
                   <MdOutlineEmail size={20} /> omotoshotobi26@gmail.com
                 </div>
                 <div className="flex gap-2 items-center">

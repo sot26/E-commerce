@@ -24,10 +24,10 @@ const OrderHistory = () => {
   const filteredOrder = orders.filter((order) => order.userID === userID);
 
   return (
-    <div className="w-full min-h-[100vh] px-[20px] lg:px-[100px] py-[20px] lg:py-[100px]">
+    <div className="w-full min-h-[100vh] px-[3px] md:px-[20px] lg:px-[100px] py-[20px] lg:py-[100px]">
       <div>
-        <p className="text-3xl font-semibold">Order History</p>
-        <p className="text-xl my-6">
+        <p className="text-xl md:text-3xl font-semibold">Order History</p>
+        <p className="text-lg md:text-xl my-2 md:my-6">
           Open an order to leave <b>Product Review</b>
         </p>
         {isLoading && (
@@ -47,7 +47,7 @@ const OrderHistory = () => {
         ) : (
           <table className="w-full ">
             <thead>
-              <tr className="text-[13px] md:text-2xl font-bold border-[3px] border-blue-300  ">
+              <tr className="text-[10px] sm:text-[13px] md:text-2xl font-bold border-[3px] border-blue-300  ">
                 <td className="border-r-2 border-blue-300">s/n</td>
                 <td className="border-r-2 border-blue-300">Date</td>
                 <td className="border-r-2 border-blue-300">Order ID</td>
@@ -61,7 +61,7 @@ const OrderHistory = () => {
               return (
                 <tbody key={id} className="cursor-pointer">
                   <tr
-                    className="text-[12px] sm:text-xl md:text-[20px]  shadow-md border-[2px] border-black"
+                    className="text-[10px] sm:text-xl md:text-[20px]  shadow-md border-[2px] border-black"
                     key={id}
                     onClick={() => handleClick(id)}
                   >
@@ -71,7 +71,15 @@ const OrderHistory = () => {
                     </td>
                     <td className=" border-r-2 border-black">{id}</td>
                     <td className=" border-r-2 border-black">${orderAmount}</td>
-                    <td className=" border-r-2 border-black">{orderStatus}</td>
+                    <td
+                      className={
+                        orderStatus !== "Delivered"
+                          ? "border-r-2 border-black text-red-400"
+                          : "text-green-500 border-r-2 border-black"
+                      }
+                    >
+                      {orderStatus}
+                    </td>
                   </tr>
                 </tbody>
               );

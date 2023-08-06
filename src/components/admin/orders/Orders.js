@@ -22,7 +22,7 @@ const Orders = () => {
     navigate(`/admin/order-details/${id}`);
   };
   return (
-    <div className="w-full min-h-[100vh] px-[20px]  py-[20px] ">
+    <div className="w-full min-h-[100vh] md:px-[20px] px-0  py-[20px] ">
       <div>
         <p className="text-3xl font-semibold">All Orders</p>
         <p className="text-xl my-6">
@@ -45,7 +45,7 @@ const Orders = () => {
         ) : (
           <table className="w-full ">
             <thead>
-              <tr className="text-[13px] md:text-2xl font-bold border-[3px] border-blue-300  ">
+              <tr className="sm:text-xl text-[8px] xxs:text-[13px] md:text-2xl font-bold border-[3px] border-blue-300  ">
                 <td className="border-r-2 border-blue-300">s/n</td>
                 <td className="border-r-2 border-blue-300">Date</td>
                 <td className="border-r-2 border-blue-300">Order ID</td>
@@ -63,13 +63,19 @@ const Orders = () => {
                     key={id}
                     onClick={() => handleClick(id)}
                   >
-                    <td className=" border-r-2 border-black">{index + 1}</td>
-                    <td className="border-r-2 border-black">
+                    <td className=" border-r-2 border-black text-[10px] sm:text-xl md:text-base">
+                      {index + 1}
+                    </td>
+                    <td className="border-r-2 border-black text-[10px] sm:text-xl md:text-base">
                       {orderDate} at {orderTime}
                     </td>
-                    <td className=" border-r-2 border-black">{id}</td>
-                    <td className=" border-r-2 border-black">${orderAmount}</td>
-                    <td className=" border-r-2 border-black">
+                    <td className=" border-r-2 border-black text-[10px] sm:text-xl md:text-base">
+                      {id}
+                    </td>
+                    <td className=" border-r-2 border-black text-[10px] sm:text-xl md:text-base">
+                      ${orderAmount}
+                    </td>
+                    <td className=" border-r-2 border-black text-[10px] sm:text-xl md:text-base">
                       <p
                         className={
                           orderStatus !== "Delivered"

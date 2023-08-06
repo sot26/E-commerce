@@ -58,23 +58,23 @@ const Login = () => {
   return (
     <>
       <div className="w-full h-full">
-        <div className="w-full flex items-center justify-center px-10 h-[100vh]">
+        <div className="w-full flex items-center justify-center px-[2px] xxs:px-2 md:px-10 min-h-[100vh]">
           <div className="hidden md:flex h-[600px]">
             <img src={login} alt="login" className="" />
           </div>
           <div className=" shadow-xl rounded-xl w-auto">
             <div className="px-4">
-              <p className="text-5xl font-semibold text-orange-600 text-center py-4">
+              <p className="text-2xl md:text-5xl font-semibold text-orange-600 text-center py-4">
                 Login
               </p>
               <form
                 onSubmit={handleLogin}
-                className="flex flex-col min-w-[300px] sm:w-[400px] text-2xl"
+                className="flex flex-col w-full sm:w-[400px] text-lg md:text-2xl"
               >
                 <input
                   type="email"
                   placeholder="Email"
-                  className="p-2 border-2 h-[45px] my-3 rounded-lg"
+                  className="p-2 border-2 h-[30px]  md:h-[45px] my-3 rounded-lg"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -82,7 +82,7 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="p-2 border-2 h-[45px] my-3 rounded-lg"
+                  className="p-2 border-2 h-[30px]  md:h-[45px] my-3 rounded-lg"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -105,7 +105,7 @@ const Login = () => {
                 <FaGoogle size={30} className="px-2" />
                 Login With Google
               </button>
-              <p className="text-xl pt-3 pb-6">
+              <p className="text-lg md:text-xl pt-3 pb-6">
                 Don't have an account,{" "}
                 <Link to="/register" className="font-bold">
                   Register

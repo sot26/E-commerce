@@ -74,7 +74,7 @@ const OrderDetails = () => {
                 return (
                   <tr
                     key={id}
-                    className="text-md sm:text-xl md:text-[20px] font-medium shadow-md"
+                    className="text-[10px] md:text-2xl font-medium shadow-md"
                   >
                     <td className=" border-r-2">{index + 1}</td>
                     <td className="border-r-2">
