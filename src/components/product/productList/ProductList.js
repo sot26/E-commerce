@@ -19,7 +19,7 @@ const ProductList = ({ products }) => {
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(9);
+  const [productsPerPage, setProductsPerPage] = useState(12);
 
   //get current product
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -46,8 +46,8 @@ const ProductList = ({ products }) => {
           <BsFillGridFill
             className={
               grid
-                ? "mr-2 p-[3px]  cursor-pointer bg-blue-700 text-white"
-                : "mr-2 cursor-pointer text-orange-500"
+                ? "mr-2 p-[3px]  cursor-pointer text-white bg-orange-500"
+                : "mr-2 cursor-pointer text-black"
             }
             size={22}
             onClick={() => setGrid(true)}
@@ -55,8 +55,8 @@ const ProductList = ({ products }) => {
           <FaListAlt
             className={
               !grid
-                ? " p-[3px]  cursor-pointer bg-blue-700 text-white"
-                : " cursor-pointer text-orange-500"
+                ? " p-[3px]  cursor-pointer text-white bg-orange-500"
+                : " cursor-pointer text-black"
             }
             size={22}
             onClick={() => setGrid(false)}
@@ -84,7 +84,7 @@ const ProductList = ({ products }) => {
       <div
         className={
           grid
-            ? "grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 xl:gap-20"
+            ? "grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 xl:gap-12"
             : "block "
         }
       >

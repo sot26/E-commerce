@@ -27,7 +27,7 @@ const OrderHistory = () => {
     <div className="w-full min-h-[100vh] px-[3px] md:px-[20px] lg:px-[100px] py-[20px] lg:py-[100px]">
       <div>
         <p className="text-xl md:text-3xl font-semibold">Order History</p>
-        <p className="text-lg md:text-xl my-2 md:my-6">
+        <p className="text-sm sm:text-lg md:text-xl my-[4px] sm:my-2 md:my-6">
           Open an order to leave <b>Product Review</b>
         </p>
         {isLoading && (
@@ -66,7 +66,7 @@ const OrderHistory = () => {
                     onClick={() => handleClick(id)}
                   >
                     <td className=" border-r-2 border-black">{index + 1}</td>
-                    <td className="border-r-2">
+                    <td className="border-r-2 border-black">
                       {orderDate} at {orderTime}
                     </td>
                     <td className=" border-r-2 border-black">{id}</td>

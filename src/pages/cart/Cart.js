@@ -97,7 +97,7 @@ const Cart = () => {
                     <td className="border-r-2 text-[12px] md:text-2xl font-semibold">
                       <p className="pt-2 md:ml-4">{name}</p>
                       <img
-                        className="w-[110px] h-auto md:w-[180px] ml-2 md:ml-4"
+                        className="w-auto h-auto md:w-[180px] md:ml-4"
                         src={imageURL}
                         alt="product "
                       />
@@ -152,7 +152,7 @@ const Cart = () => {
                 >
                   Clear cart
                 </button>
-                <div className="text-lg md:text-2xl font-medium">
+                <div className="text-sm my-[4px] md:text-2xl font-medium">
                   <Link to="/#products">&larr; Continue shopping</Link>
                 </div>
               </div>
@@ -161,20 +161,22 @@ const Cart = () => {
 
           {cartItems.length === 0 ? null : (
             <div className="flex md:flex-row-reverse mt-3 ">
-              <div className="w-full max-w-[300px] p-4 shadow-2xl rounded-2xl">
-                <p className="text-lg md:text-xl font-semibold">{`Cart item(s): ${cartTotalQuantity}`}</p>
+              <div className="w-full max-w-[300px] p-2 md:p-4 shadow-2xl rounded-2xl">
+                <p className="text-sm sm:text-lg md:text-xl font-semibold">{`Cart item(s): ${cartTotalQuantity}`}</p>
                 <div className="flex justify-between my-2">
-                  <p className="text-2xl md:text-3xl font-semibold">Subtotal</p>
-                  <p className="text-2xl text-orange-500 md:text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
+                  <p className="text-lg sm:text-2xl md:text-3xl font-semibold">
+                    Subtotal
+                  </p>
+                  <p className="text-lg sm:text-2xl text-orange-500 md:text-3xl font-semibold">{`$${cartTotalAmount.toFixed(
                     2
                   )}`}</p>
                 </div>
-                <p className="text-[15px] md:text-lg mb-2">
+                <p className="text-[10px] sm:text-[15px] md:text-lg mb-2">
                   Taxes and shipping calculated at checkout
                 </p>
                 <button
                   onClick={checkOut}
-                  className="p-2 md:p-3 text-white text-lg md:text-xl bg-blue-600 rounded-lg w-full"
+                  className="p-2 md:p-3 text-white text-sm sm:text-lg md:text-xl bg-blue-600 rounded-lg w-full"
                 >
                   Checkout
                 </button>

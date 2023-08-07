@@ -104,7 +104,7 @@ const ProductFilter = () => {
         <div>
           <button
             onClick={clearFilters}
-            className="min-w-[100px] md:w-[120px] text-white bg-orange-500 rounded-lg border-2 text-md md:text-lg p-2  hover:translate-y-1 hover:duration-200"
+            className="min-w-[100px] md:w-[120px] text-white bg-black rounded-lg border-2 text-md md:text-lg p-2  hover:translate-y-1 hover:duration-200"
           >
             Clear Filter
           </button>

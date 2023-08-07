@@ -60,7 +60,7 @@ const CheckoutDetails = () => {
     <div className="w-full h-full">
       <div className="w-full px-4 md:px-20 py-4 md:py-12">
         <p className="text-4xl font-semibold pb-4">Checkout Details</p>
-        <div className="md:flex">
+        <div className="md:flex flex-col-reverse md:flex-row flex">
           <div className="w-ful md:w-[55%] shadow-2xl p-3">
             <p className="text-3xl ">Shipping Address</p>
             <form onSubmit={handleSubmit}>
@@ -273,7 +273,7 @@ const CheckoutDetails = () => {
               </div>
             </form>
           </div>
-          <div className="w-ful md:w-[45%] mt-9 md:mt-0">
+          <div className="w-ful md:w-[45%] ml-0 md:ml-2">
             {cartItems.length === 0 ? (
               <div>
                 <p className="text-2xl">No item in your cart</p>

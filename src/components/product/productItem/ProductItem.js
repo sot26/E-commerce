@@ -27,7 +27,7 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
       <div
         className={
           grid
-            ? "flex flex-col rounded-2xl shadow-xl items-center justify-center text-center "
+            ? "flex flex-col rounded-2xl border-[1px] shadow-xl items-center justify-center text-center "
             : "flex "
         }
       >
@@ -48,8 +48,8 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
         </Link>
         <div className={grid ? "w-full" : "flex flex-col justify-between"}>
           <div className={grid ? "my-4" : "pl-2"}>
-            <p className="text-lg md:text-2xl text-orange-500 font-bold">{`$${price}`}</p>
-            <p className="xxs:text-[12px] text-[15px] md:text-[16px] lg:text-[19px] xl:text-3xl font-semibold">
+            <p className="text-lg md:text-2xl text-black font-bold">{`$${price}`}</p>
+            <p className="xxs:text-[12px] text-[15px] text-gray-600 md:text-[16px] lg:text-[19px] xl:text-3xl font-semibold">
               {shortenText(name, 18)}
             </p>
 
@@ -62,8 +62,8 @@ const ProductItem = ({ id, name, imageURL, price, desc, grid, product }) => {
               onClick={() => addToCart(product)}
               className={
                 grid
-                  ? "w-full bg-orange-500 h-[29px] md:h-[45px] rounded-lg md:rounded-xl hover:translate-y-1 hover:duration-200"
-                  : "w-[100px] md:w-[180px] bg-orange-500 rounded-lg md:rounded-xl h-[29px] md:h-[35px] mb-2 ml-2 hover:translate-y-1 hover:duration-200"
+                  ? "w-full bg-black h-[29px] md:h-[45px] rounded-lg md:rounded-xl hover:translate-y-1 hover:duration-200"
+                  : "w-[100px] md:w-[180px] bg-black rounded-lg md:rounded-xl h-[29px] md:h-[35px] mb-2 ml-2 hover:translate-y-1 hover:duration-200"
               }
             >
               Add to cart

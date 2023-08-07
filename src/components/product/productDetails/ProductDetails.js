@@ -63,11 +63,11 @@ const ProductDetails = () => {
           <img
             src={product.imageURL}
             alt={product.name}
-            className="border-2 min-h-[400px] max-h-[500px] w-auto"
+            className="border-2  min-h-[200px] max-h-[300px] lg:min-h-[400px] lg:max-h-[500px] w-auto"
           />
           <div className="px-3">
             <p className="md:text-4xl text-2xl font-semibold">{product.name}</p>
-            <p className="md:mt-4 mt-2 md:text-2xl text-xl font-semibold text-orange-600">
+            <p className="md:mt-4 mt-2 md:text-2xl text-xl font-semibold text-black">
               ${product.price}
             </p>
             <p className="md:mt-4 mt-2 text-[12px] md:text-[16px]">
@@ -98,9 +98,9 @@ const ProductDetails = () => {
             )}
             <button
               onClick={() => addToCart(product)}
-              className="md:mt-4 mt-2 md:py-2 px-4 h-[25px] md:h-[45px] md:text-xl text-white bg-orange-500 rounded-lg md:rounded-xl"
+              className="p-2 md:mt-4 mt-2 md:py-2 px-4  md:h-[45px] text-sm md:text-xl text-white bg-black rounded-lg md:rounded-xl"
             >
-              ADD TO CART
+              Add to cart
             </button>
           </div>
         </div>
@@ -117,7 +117,9 @@ const ProductDetails = () => {
                   className="mt-4 p-3 max-w-[600px] shadow-xl rounded-lg"
                 >
                   <div>
-                    <p className="text-2xl border-b-[2px]">Product Review</p>
+                    <p className="text-xl lg:text-2xl border-b-[2px]">
+                      Product Review
+                    </p>
                     <div>
                       <StarsRating disabled value={review.rate} />
                     </div>

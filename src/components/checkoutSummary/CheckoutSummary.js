@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   CALCULATE_SUBTOTAL,
   selectCartItems,
@@ -13,14 +12,13 @@ const CheckoutSummary = () => {
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
   }, [dispatch]);
   return (
     <div className="flex ">
-      <div className="w-full p-4 shadow-2xl rounded-2xl ">
+      <div className="w-full p-4 shadow-lg md:shadow-2xl rounded-2xl ">
         <p className="text-lg md:text-3xl font-semibold">Checkout Summary</p>
         <p className="text-lg md:text-xl font-semibold my-2">{`Cart item(s): ${cartTotalQuantity}`}</p>
         <div className="flex justify-between ">

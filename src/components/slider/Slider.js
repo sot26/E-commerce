@@ -88,7 +88,7 @@ const Slider = () => {
               <hr className="h-2 text-white w-full" />
               <button
                 onClick={scrollDown}
-                className="p-2 md:p-4 bg-blue-700 rounded-lg text-xl md:text-2xl"
+                className="p-2 md:p-4 bg-orange-500 rounded-lg text-xl md:text-2xl"
               >
                 Shop Now
               </button>
