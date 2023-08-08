@@ -83,14 +83,14 @@ const ProductDetails = () => {
               <div className="flex items-center text-xl ">
                 <button
                   onClick={() => decreaseCart(product)}
-                  className="p-1 bg-gray-200"
+                  className="px-1 bg-gray-200"
                 >
                   -
                 </button>
-                <p className="mx-1 font-semibold ">{cart.cartQuantity}</p>
+                <p className="mx-2 font-semibold ">{cart.cartQuantity}</p>
                 <button
                   onClick={() => addToCart(product)}
-                  className="p-1 bg-gray-200"
+                  className="px-1 bg-gray-200"
                 >
                   +
                 </button>

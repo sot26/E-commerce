@@ -41,7 +41,7 @@ const Product = () => {
         <div
           className={
             showFilter
-              ? "absolute w-[50%] h-[60vh] px-2 shadow-xl  flex md:w-[15%]"
+              ? "absolute w-[50%] h-[60vh] px-2 shadow-3xl  flex md:w-[15%] "
               : "hidden md:flex md:w-[15%]"
           }
         >
@@ -64,7 +64,7 @@ const Product = () => {
           )}
 
           <div
-            className="absolute top-8 cursor-pointer right-4 md:hidden flex"
+            className="absolute top-4 cursor-pointer right-4 md:hidden flex"
             onClick={toggleFilter}
           >
             <FaCogs size={20} color="orangered" />
