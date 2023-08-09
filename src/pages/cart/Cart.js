@@ -148,7 +148,7 @@ const Cart = () => {
               <div>
                 <button
                   onClick={clearCart}
-                  className="py-[7px]  px-[12px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-orange-600 rounded-lg"
+                  className="py-[7px]  px-[12px] md:py-3 md:px-5 text-white text-[12px] md:text-xl bg-black rounded-lg"
                 >
                   Clear cart
                 </button>
